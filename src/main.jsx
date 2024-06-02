@@ -22,6 +22,7 @@ const queryClient = new QueryClient()
 // tostify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Toaster } from 'react-hot-toast';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <RouterProvider router={router} />
         <ToastContainer />
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
 

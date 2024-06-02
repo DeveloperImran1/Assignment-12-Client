@@ -12,10 +12,19 @@ import SidebarButton from './SidebarButton'
 import useAxiosPublic from '../../hooks/useAxiosPublic'
 import { useQuery } from '@tanstack/react-query'
 import useRoleCollect from '../../hooks/useRoleCollect'
+import { CgProfile } from "react-icons/cg";
+import { FaBookmark } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
+import useMyTotalBooking from '../../hooks/useMyTotalBooking'
+import useMyTotalWishList from '../../hooks/useMyTotalWishList'
+import AdminRequestModal from '../Modal/AdminRequestModal'
+
 
 const Sidebar = () => {
-  const { logOut } = useAuth()
+  const { logOut, loading } = useAuth()
   const [isActive, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -24,10 +33,25 @@ const Sidebar = () => {
 
   const { userRole: role } = useRoleCollect();
 
-  console.log("user er role holo", role)
+
+  const { myTotalBooking, refetch: bookingRefetch } = useMyTotalBooking();
+  const { myTotalWishList, refetch: wishListRefetch } = useMyTotalWishList()
+  console.log(myTotalWishList.result)
+
+  const modalHandler = () => {
+    console.log('moda open kor')
+    setIsOpen(true)
+
+  }
+  const onClose = ()=> {
+    setIsOpen(false)
+  }
 
   return (
     <>
+      {/* admin request modal  */}
+      <AdminRequestModal isOpen={isOpen} closeModal={onClose} modalHandler={modalHandler}></AdminRequestModal>
+
       {/* Small Screen Navbar */}
       <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
         <div>
@@ -77,7 +101,7 @@ const Sidebar = () => {
             <nav>
               {
                 role === "Admin" && <>
-                  <SidebarButton path="/dashboard/admin-profile" icon={BsGraphUp} name="Profile" ></SidebarButton>
+                  <SidebarButton path="/dashboard/admin-profile" icon={CgProfile} name="Profile" ></SidebarButton>
                   <SidebarButton path="/dashboard/admin-addPackage" icon={BsGraphUp} name="Add Package" ></SidebarButton>
                   <SidebarButton path="/dashboard/admin-manageUsers" icon={BsGraphUp} name="Manage Users" ></SidebarButton>
 
@@ -85,16 +109,22 @@ const Sidebar = () => {
               }
               {
                 role === "tourGuide" && <>
-                  <SidebarButton path="/dashboard/tourGuide-profile" icon={BsFillHouseAddFill} name="Profile" ></SidebarButton>
+                  <SidebarButton path="/dashboard/tourGuide-profile" icon={CgProfile} name="Profile" ></SidebarButton>
                   <SidebarButton path="/dashboard/tourGuide-myAssigned" icon={BsFillHouseAddFill} name="My Assigned" ></SidebarButton>
                 </>
               }
               {
                 role === "Tourist" && <>
-                  <SidebarButton path="/dashboard/tourist-profile" icon={BsFillHouseAddFill} name="Profile" ></SidebarButton>
-                  <SidebarButton path="/dashboard/tourist-myBooking" icon={BsFillHouseAddFill} name="My Booking" ></SidebarButton>
-                  <SidebarButton path="/dashboard/tourist-myWishlist" icon={BsFillHouseAddFill} name="My Wishlist" ></SidebarButton>
-                  <SidebarButton path="/dashboard/tourist-requestAdmin" icon={BsFillHouseAddFill} name="Request Admin" ></SidebarButton>
+                  <SidebarButton path="/dashboard/tourist-profile" icon={CgProfile} name="Profile" ></SidebarButton>
+                  <SidebarButton path="/dashboard/tourist-myBooking" icon={FaBookmark} name="My Booking" color="text-blue-400" myTotalBooking={myTotalBooking?.result} ></SidebarButton>
+                  <SidebarButton path="/dashboard/tourist-myWishlist" icon={FaHeart} name="My Wishlist" color="text-red-500" myTotalWishList={myTotalWishList?.result}></SidebarButton>
+                  <SidebarButton path="/dashboard/tourist-addStory" icon={FaHeart} name="Add Stoy" ></SidebarButton>
+
+                  <button onClick={modalHandler} className={ `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 `}>
+                    <GrUserAdmin className={`w-5 h-5`}></GrUserAdmin>
+                    <span className='mx-4 font-medium'>Request Admin</span>
+
+                  </button>
                 </>
               }
 

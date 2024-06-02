@@ -53,16 +53,19 @@ const AuthProvider = ({ children }) => {
     }
 
     // save user data in db
-    const handleSaveUser = async (user)=> {
-        const userInfo = {
-            userName: user?.displayName,
-            userEmail: user?.email,
-            userPhoto: user?.photoURL,
-            userRole: "Tourist",
-            userStatus: 'Verified'
+    const handleSaveUser = async (user) => {
+        if (user?.displayName || user?.email, user?.photoURL) {
+            const userInfo = {
+                userName: user?.displayName,
+                userEmail: user?.email,
+                userPhoto: user?.photoURL,
+                userRole: "Tourist",
+                userStatus: 'Verified'
+            }
+            console.log("Db te user add hotr jaia", userInfo)
+            const data = await axiosPublic.post('/users', userInfo);
         }
-        const data = await axiosPublic.post('/users', userInfo);
-        // console.log("Db te user add hotr jaia", data.data)
+
     }
 
 
@@ -100,7 +103,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, handleUpdateProfile, }
+    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile, }
 
     return (
         <AuthContext.Provider value={authInfo}>

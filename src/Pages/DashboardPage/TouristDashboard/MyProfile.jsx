@@ -1,10 +1,11 @@
+import TouristProfile from "../../../Components/TouristProfile";
 import useAuth from "../../../hooks/useAuth";
 
 const MyProfile = () => {
     const {user}= useAuth();
     return (
         <div>
-            <p className="" >My profile page</p>
+            <TouristProfile></TouristProfile>
         </div>
     );
 };
