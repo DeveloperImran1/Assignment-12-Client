@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import WishListCard from "./WishListCard";
 
 const MyWishlist = () => {
     const { user } = useAuth();
@@ -15,8 +16,10 @@ const MyWishlist = () => {
     console.log(myWishlist)
     
     return (
-        <div>
-            My MyWishlist page
+        <div className="grid grid-cols-3 gap-7" >
+            {
+                myWishlist.map(wishList => <WishListCard key={wishList?._id} wishList={wishList} refetch={refetch} ></WishListCard> )
+            }
         </div>
     );
 };

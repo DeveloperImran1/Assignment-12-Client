@@ -88,7 +88,8 @@ const router = createBrowserRouter([
             // Tour Guide Routes
             {
                 path: '/dashboard/tourGuide-profile',
-                element: <TourGuideProfile></TourGuideProfile>
+                // element: <TourGuideProfile></TourGuideProfile>
+                element: <TourGuideDetails></TourGuideDetails>
             },
             {
                 path: '/dashboard/tourGuide-myAssigned',

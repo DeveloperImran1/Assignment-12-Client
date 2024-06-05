@@ -9,9 +9,17 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
+import PackageDetailsInfo from "./PackageDetailsInfo";
+import VerticalLinearStepper from "./TourPlan";
 
 
+// import required modules
 
+import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import toast, { Toaster } from 'react-hot-toast';
+import OurPackagesCard from "./OurPackagesCard";
+import SeactionTitle from "../SeactionTitle";
 
 const PackageDetails = () => {
     const axiosPublic = useAxiosPublic();
@@ -19,33 +27,58 @@ const PackageDetails = () => {
     const { user } = useAuth();
     const [startDate, setStartDate] = useState(new Date());
     const [options, setOptions] = useState([]);
-
+    const [loading, setLoading] = useState(true)
+    
+   
 
     // get all tour guide name
     useEffect(() => {
         let tourGuideName = [];
         axiosPublic.get('/tourGuidesName')
             .then(res => {
-                const nameArray = res.data.map(obj => tourGuideName.push(obj.name))
-                setOptions(tourGuideName)
+                console.log(res.data)
+                // const nameArray = res.data.map(obj => tourGuideName.push(obj.userName))
+                // setOptions(tourGuideName)
+                setOptions(res.data)
+                setLoading(false)
             })
     }, [axiosPublic])
+    console.log(options)
 
     // dropdown button er jonno
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState("Choose Tour Guide")
+    const [selectedValue, setSelectedValue] = useState("Selecte Your Tour Guide")
+    const [selectedEmail, setSelectedEmail] = useState("")
 
 
     // get specific spot info
     const { data: spotDetails = {}, refetch } = useQuery({
-        queryKey: ['spotDetails'],
+        queryKey: ['spotDetails', id],
         queryFn: async () => {
+            setLoading(true)
             const data = await axiosPublic.get(`/spot/${id}`)
+            setLoading(false)
             return data.data;
         }
     })
-    console.log(spotDetails)
-    const { _id, aboutOfSpots, price, spotPhoto, spotVideo, tourPlan, tourType, tripTitle, } = spotDetails;
+
+
+    const { _id, aboutOfSpots, location, price, seasonality, spotPhoto, spotVideo, totalVisitorPerYear, tourPlan, tourType, tripName, tripTime, tripTitle, } = spotDetails;
+
+
+    // get specific tourType spots info
+    const { data: relatedSpots = [] } = useQuery({
+        queryKey: ['relatedSpots', tourType],
+        queryFn: async () => {
+            setLoading(true)
+            const data = await axiosPublic.get(`/spots/${tourType}`)
+            setLoading(false)
+            return data.data;
+        }
+    })
+
+    // console.log( "Related Packages", relatedSpots)
+
 
     const handleBooking = e => {
         e.preventDefault();
@@ -54,58 +87,65 @@ const PackageDetails = () => {
         const email = user?.email;
         const bookingDate = startDate;
         const guideName = selectedValue;
-        const packagePrice = price;
+        const guideEmail = selectedEmail;
+        const packagePrice = parseInt(price);
         const bookingTime = new Date();
-        const bookingInfo = {name, photo, email, bookingDate, guideName, packagePrice, bookingTime}
-        console.log('handle booking callded', bookingInfo )
+        const bookingStatus = "In Review"
+        const bookingInfo = { name, photo, email, bookingDate, guideName, guideEmail, packagePrice, bookingTime, tripName , spotPhoto, tripTitle, bookingStatus}
+        // console.log('handle booking callded', bookingInfo)
+        console.log('selected value ', selectedValue, selectedEmail)
+
+        if(!bookingDate || !guideName){
+            return toast.error("This didn't work.")
+        }
 
         axiosPublic.post('/packageBooking', bookingInfo)
-        .then(res => {
-            console.log(res.data)
-            if(res.data.insertedId){
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Successfully Submited! Wait for Tour Guide Approval",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
+            .then(res => {
+                // console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Successfully Submited! Wait for Tour Guide Approval",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
     return (
-        <div>
-            <div className="max-w-lg p-4 shadow-md dark:bg-gray-50 dark:text-gray-800">
-                <div className="flex justify-between pb-4 border-bottom">
-                    <div className="flex items-center">
-                        <a rel="noopener noreferrer" href="#" className="mb-0 capitalize dark:text-gray-800">{tripTitle}</a>
-                    </div>
-                    <a rel="noopener noreferrer" href="#">{tourType}</a>
-                </div>
-                <div className="space-y-4">
-                    <div className="space-y-2">
-                        <img src="https://source.unsplash.com/random/480x360/?4" alt="" className="block object-cover object-center w-full rounded-md h-72 dark:bg-gray-500" />
-                        <div className="flex items-center text-xs">
-                            <span>6 min ago</span>
+        <div className="w-full lg:w-[85%] mx-auto p-5 border-2 rounded-2xl" >
+            <PackageDetailsInfo packageInfo={spotDetails} ></PackageDetailsInfo>
+
+            <div className="flex justify-between w-full mt-[60px]" >
+                <div className="flex flex-col gap-5  ">
+                    <VerticalLinearStepper tourPlan={tourPlan} ></VerticalLinearStepper>
+                    <div>
+                        <div className="flex justify-between">
+                            <p className="text-base my-6"><span className="text-[20px] font-semibold text-black" >Location:</span> {location}</p>
+                            <p className="text-base my-6"><span className="text-[20px] font-semibold text-black" >Total Travel Time:</span> {tripTime}</p>
                         </div>
-                    </div>
-                    <div className="space-y-2">
-                        <a rel="noopener noreferrer" href="#" className="block">
-                            <h3 className="text-xl font-semibold dark:text-violet-600">Facere ipsa nulla corrupti praesentium pariatur architecto</h3>
-                        </a>
-                        <p className="leading-snug dark:text-gray-600">{aboutOfSpots}</p>
+                        <MapContainer
+                            center={[23.7104, 90.4074]}
+                            zoom={11}
+                            scrollWheelZoom={true}
+                            className="h-[40vh] md:h-[50vh] lg:h-[70vh]"
+                        >
+                            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                            <Marker position={[23.7104, 90.4074]}>
+                                <Popup>
+                                    {location}
+                                </Popup>
+                            </Marker>
+                        </MapContainer>
                     </div>
                 </div>
-            </div>
 
-            <AllTourGuides></AllTourGuides>
-
-            <div>
-                <form onSubmit={handleBooking} className="flex flex-col px-6 py-8  space-y-6  w-[40%] border-2 border-[#5A5A5D] rounded-[16px] ">
+                <form onSubmit={handleBooking} className="flex  flex-col px-6 py-8 w-[45%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
                     <div>
                         <img alt="" className="w-[500px] h-full  rounded shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src="https://i.ibb.co/YBJM4Z4/folio-img3-1536x960.jpg" />
-                        <p className="text-[24px] font-semibold  text-center mt-5 ">Please Fillup This Form </p>
                     </div>
+                        <p className="text-[24px] font-semibold  text-center mt-5 ">Please Fillup This Form </p>
 
 
 
@@ -116,7 +156,7 @@ const PackageDetails = () => {
                             <input type="text" placeholder="Your name" value={user?.displayName} className="block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                         </label>
                         <label className="block">
-                            <img src={user?.photoURL} alt="" className="rounded-full w-[60px]" />
+                            <img src={user?.photoURL} alt="" className="rounded-full w-[70px] h-[70px] " />
                         </label>
 
                     </div>
@@ -133,28 +173,41 @@ const PackageDetails = () => {
                         <DatePicker className="block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " selected={startDate} onChange={(date) => setStartDate(date)} />
                     </label>
 
-                    <label className="">
+                    <label className="relative ">
                         {/* dropdown - btn */}
                         <div onClick={() => setIsOpen(!isOpen)} className=" w-full flex justify-between  rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
                             <h1 className="font-medium text-gray-600">{selectedValue}</h1>
                             <svg className={`${isOpen ? '-rotate-180' : 'rotate-0'} duration-300`} width={25} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7 10L12 15L17 10" stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>{' '}</g></svg>
                         </div>
                         {/* dropdown - options  */}
-                        <div className={`${isOpen ? 'visible top-0 opacity-100' : 'invisible -top-4 opacity-0'} relative mx-auto my-4 rounded-xl py-4  duration-300 block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 `}>
+                        <div className={`${isOpen ? 'visible top-0 opacity-100 relative' : 'invisible absolute -top-4 opacity-0'}  mx-auto my-4 rounded-xl py-4  duration-300 block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 `}>
                             {options?.map((option, idx) => (
-                                <div key={idx} onClick={(e) => { setSelectedValue(e.target.textContent); setIsOpen(false); }} className="px-6 py-2 text-gray-500 hover:bg-gray-100">
-                                    {option}
+                                <div key={idx} onClick={() => {setSelectedValue(option?.userName); setSelectedEmail(option?.userEmail) ; setIsOpen(false); }} className="px-6 py-2 text-gray-500 hover:bg-gray-100">
+                                    {option?.userName}
                                 </div>
                             ))}
                         </div>
                     </label>
-                    
+
 
                     <button type="submit" className="rounded-lg  border-2 border-sky-500 px-8 py-3 text-xl text-sky-500 duration-200 hover:bg-[#199fff] hover:text-white">Book Now</button>
 
                 </form>
 
             </div>
+
+
+            <AllTourGuides></AllTourGuides>
+
+          <div className="" >
+            <SeactionTitle name="Related Packages" title="For Your Sujjested Spots" ></SeactionTitle>
+          <div className="grid grid-cols-2 gap-11" >
+                {
+                    relatedSpots.map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard> )
+                }
+            </div>
+          </div>
+
         </div>
     );
 };

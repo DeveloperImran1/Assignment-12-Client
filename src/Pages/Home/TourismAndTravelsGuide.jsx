@@ -8,7 +8,7 @@ import OurPackages from '../../Components/OurPackages/OurPackages';
 const TourismAndTravelsGuide = () => {
     return (
         <div>
-<SeactionTitle title="Tourism & Travels Guide" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit voluptatum maiores velit deserunt non sunt facere expedita recusandae beatae. Quidem." ></SeactionTitle>
+<SeactionTitle title="Explore Our Tourism & Travels Guide" name="Travels Guide"  ></SeactionTitle>
             <Tabs>
                 <TabList>
                     <Tab>Overview</Tab>

@@ -20,6 +20,7 @@ const AdminRequestModal = ({ closeModal, isOpen, modalHandler }) => {
 
     const {user, loading, setLoading} = useAuth();
     const axiosSecure = useAxiosSecure();
+    
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -29,11 +30,13 @@ const AdminRequestModal = ({ closeModal, isOpen, modalHandler }) => {
         const skills = form.skills.value;
         const age = form.age.value;
         const experience = form.experience.value;
+        const reviews = [];
 
         if(!phoneNumber.length || !education.length || !skills.length || !age.length || !experience.length){
             return errorEmptyField()
         }
-        const guideInfo = { phoneNumber, education, skills, age, experience}
+        const guideInfo = { phoneNumber, education, skills, age, experience, reviews }
+        console.log(guideInfo)
         setLoading(true)
         axiosSecure.patch(`/updateUser/${user?.email}`, guideInfo)
         .then(res => {
@@ -66,7 +69,7 @@ const AdminRequestModal = ({ closeModal, isOpen, modalHandler }) => {
                     leaveFrom='opacity-100'
                     leaveTo='opacity-0'
                 >
-                    <div className='fixed inset-0 bg-black bg-opacity-25' />
+                    <div className='fixed inset-0 bg-black bg-opacity-25  ' />
                 </TransitionChild>
               
                 <div className='fixed inset-0 overflow-y-auto'>

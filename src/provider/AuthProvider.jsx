@@ -60,13 +60,20 @@ const AuthProvider = ({ children }) => {
                 userEmail: user?.email,
                 userPhoto: user?.photoURL,
                 userRole: "Tourist",
-                userStatus: 'Verified'
+                userStatus: 'Verified',
+                timestamp: new Date()
             }
             console.log("Db te user add hotr jaia", userInfo)
             const data = await axiosPublic.post('/users', userInfo);
         }
 
     }
+
+
+    // tourist booking page refetch
+    // const handleTouristBookingRefetch = (bookingFetech)=> {
+    //     setBookingRefetch(bookingFetech)
+    // }
 
 
 
@@ -102,8 +109,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-
-    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile, }
+    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile,  }
 
     return (
         <AuthContext.Provider value={authInfo}>

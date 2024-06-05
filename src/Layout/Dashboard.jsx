@@ -3,7 +3,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 
 const Dashboard = () => {
     return (
-        <div className='relative min-h-screen md:flex'>
+        <div className=' lato relative min-h-screen md:flex'>
         {/* Sidebar */}
         <Sidebar />
   

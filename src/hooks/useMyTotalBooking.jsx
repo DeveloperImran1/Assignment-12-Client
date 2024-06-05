@@ -13,7 +13,7 @@ const useMyTotalBooking = () => {
             return data.data;
         }
     })
-    return {myTotalBooking, refetch}
+    return {myTotalBooking, totalBookingRefetch: refetch}
 };
 
 export default useMyTotalBooking;

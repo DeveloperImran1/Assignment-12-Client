@@ -36,7 +36,8 @@ const Sidebar = () => {
 
   const { myTotalBooking, refetch: bookingRefetch } = useMyTotalBooking();
   const { myTotalWishList, refetch: wishListRefetch } = useMyTotalWishList()
-  console.log(myTotalWishList.result)
+  console.log( "Total bookins", myTotalBooking.result)
+  console.log( "Total wishlist", myTotalWishList.result)
 
   const modalHandler = () => {
     console.log('moda open kor')
