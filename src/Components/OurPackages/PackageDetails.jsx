@@ -203,7 +203,7 @@ const PackageDetails = () => {
             <SeactionTitle name="Related Packages" title="For Your Sujjested Spots" ></SeactionTitle>
           <div className="grid grid-cols-2 gap-11" >
                 {
-                    relatedSpots.map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard> )
+                    relatedSpots.slice(1,3).map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard> )
                 }
             </div>
           </div>

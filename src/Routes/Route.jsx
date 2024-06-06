@@ -22,6 +22,7 @@ import MyAssignedTours from "../Pages/DashboardPage/TourGuideDashboard/MyAssigne
 import MyBooking from "../Pages/DashboardPage/TouristDashboard/MyBooking";
 import MyWishlist from "../Pages/DashboardPage/TouristDashboard/MyWishlist";
 import AddStory from "../Pages/DashboardPage/TouristDashboard/AddStory";
+import TourTypePage from "../Pages/Home/TourTypePage";
 
   
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
         {
             path: '/tourGuide/:id',
             element: <TourGuideDetails></TourGuideDetails>
+        },
+        {
+            path: '/spotCategory/:category',
+            element: <TourTypePage></TourTypePage>
         },
       ]
     },

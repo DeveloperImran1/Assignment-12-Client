@@ -7,14 +7,22 @@ import { useQuery } from "@tanstack/react-query";
 import { format, formatDistanceToNow } from "date-fns";
 import { FaUserPlus } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import SeactionTitle from "../../../Components/SeactionTitle";
 
 const ManageUsers = () => {
     const [on, setValue] = useState('off')
     const axiosSecure = useAxiosSecure();
     const [filterRole, setFilterRole] = useState('');
     const [searchValue, setSearchValue] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const options = [
+        { label: 'Tourist', value: 'Tourist' },
+        { label: 'Tour Guide', value: 'tourGuide' },
+        { label: 'Admin', value: 'Admin' },
+        { label: 'All Users', value: '' }
+    ];
 
-    console.log(searchValue)
+
     const { data: allUsers, refetch } = useQuery({
         queryKey: ['allUsers', filterRole, searchValue],
         queryFn: async () => {
@@ -22,8 +30,6 @@ const ManageUsers = () => {
             return res.data;
         }
     })
-
-
 
 
     const handleUpdateRole = (updateRole, userEmail) => {
@@ -38,23 +44,24 @@ const ManageUsers = () => {
 
     return (
         <div>
-            <ButtonGroup className=" flex justify-center items-center">
-                <Button onClick={() => setValue(!on)} className={`${on ? "bg-[#23BE0A]" : "bg-[#59C6D2]"}`} ><IoGrid /></Button>
-                <Button onClick={() => setValue(!on)} className={`${on ? "bg-[#59C6D2]" : "bg-[#23BE0A]"}`} ><FaTableList /></Button>
-            </ButtonGroup>
+            <SeactionTitle name="All Users" title="Manage Users Role" ></SeactionTitle>
+            <div className="flex justify-center items-center gap-[70px] my-14 " >
+                <div className="border-2 rounded-md" >
+                    <select onChange={(e) => setFilterRole(e.target.value)} className="select mx-auto flex w-72 items-center justify-between rounded-xl bg-white px-6  ">
+                        <div className="px-6 py-2 text-gray-500 hover:bg-gray-100" ><option disabled selected>Filter With</option></div>
+                        <option value="Tourist" >Tourist</option>
+                        <option value="tourGuide" >Tour Guide</option>
+                        <option value="Admin" >Admin</option>
+                        <option value="" >All Users</option>
+                    </select>
 
-            <select onChange={(e) => setFilterRole(e.target.value)} className="select w-full max-w-xs">
-                <option disabled selected>Filter With</option>
-                <option value="Tourist" >Tourist</option>
-                <option value="tourGuide" >Tour Guide</option>
-                <option value="Admin" >Admin</option>
-                <option value="" >All Users</option>
-            </select>
+                </div>
 
-            <label onChange={(e) => setSearchValue(e.target.value)} className="input input-bordered flex items-center gap-2">
-                <input type="text" className="grow" placeholder="Search" />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-            </label>
+                <label onChange={(e) => setSearchValue(e.target.value)} className="input input-bordered flex items-center gap-2">
+                    <input type="text" className="grow" placeholder="Search" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+                </label>
+            </div>
 
             <div className="overflow-x-auto border w-full mx-auto bg-[#1313180D] rounded-xl border-black  ">
                 <table className="min-w-full text-[16px] font-semibold ">
@@ -100,10 +107,10 @@ const ManageUsers = () => {
 
 
                                 <td className="">
-                                    <button onClick={() => handleUpdateRole("tourGuide", user?.userEmail)} className="btn btn-sm ml-2 text-[#22c55e] bg-[#b5cfbe]"><FaUserPlus size={22} ></FaUserPlus> </button>
+                                    <button disabled={user?.userRole === "Admin"} onClick={() => handleUpdateRole("tourGuide", user?.userEmail)} className="btn btn-sm ml-2 text-[#22c55e] bg-[#b5cfbe]"><FaUserPlus size={22} ></FaUserPlus> </button>
                                 </td>
                                 <td className="">
-                                    <button onClick={() => handleUpdateRole("Admin", user?.userEmail)} className="btn btn-sm ml-2 text-white bg-[#076aa5]"><FaUsers size={22} ></FaUsers></button>
+                                    <button disabled={user?.userRole === "Admin"} onClick={() => handleUpdateRole("Admin", user?.userEmail)} className="btn btn-sm ml-2 text-white bg-[#076aa5]"><FaUsers size={22} ></FaUsers></button>
                                 </td>
 
                             </tr>

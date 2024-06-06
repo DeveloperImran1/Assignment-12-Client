@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import TourType from "./TourType";
 import TourismAndTravelsGuide from "./TourismAndTravelsGuide";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <TourismAndTravelsGuide></TourismAndTravelsGuide>
+            <TourType></TourType>
         </div>
     );
 };
