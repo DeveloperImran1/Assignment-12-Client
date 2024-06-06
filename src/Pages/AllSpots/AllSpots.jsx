@@ -10,17 +10,19 @@ const AllSpots = () => {
     const [minimumPrice, setMinimumPrice] = useState(0);
     const [maximumPrice, setMaximumPrice] = useState(1000);
     const [category, setCategory] = useState("");
-    // console.log("minimumPrice", minimumPrice)
-    // console.log("maximumPrice", maximumPrice)
+    const [search, setSearch] = useState("");
+    const [sort, setSort] = useState("");
+
+    console.log("sort", sort)
 
     const axiosPublic = useAxiosPublic();
     const [loading, setLoading] = useState(true)
 
     const { data: allSpots = [], refetch } = useQuery({
-        queryKey: ['allSpots', category, minimumPrice, maximumPrice],
+        queryKey: ['allSpots', category, minimumPrice, maximumPrice, search],
         queryFn: async () => {
             setLoading(true)
-            const data = await axiosPublic.get(`/allSpots?category=${category}&minimumPrice=${minimumPrice}&maximumPrice=${maximumPrice}`)
+            const data = await axiosPublic.get(`/allSpots?category=${category}&minimumPrice=${minimumPrice}&maximumPrice=${maximumPrice}&search=${search}`)
             setLoading(false)
             return data.data
         }
@@ -30,11 +32,11 @@ const AllSpots = () => {
 
     return (
         <div>
-            <div className="flex justify-between items-start h-screen " >
-                <div className="w-[30%]  overflow-auto " >
+            <div className="flex justify-between gap-7 items-start h-screen " >
+                <div className="w-[30%] " >
                     <div className="flex flex-col justify-center items-center gap-8 " >
 
-                        <div className="flex flex-col justify-center items-center gap-4 my-7" >
+                        <div className="flex flex-col justify-center items-center gap-4 my-7 mb-16" >
                             <p className="text-[18px] text-center sriracha px-2 rounded-md text-white  -rotate-6 bg-[#076aa5] " >All Packages</p>
                             <h2 className="text-3xl font-bold " >Find Your Favorute Package</h2>
                         </div>
@@ -57,17 +59,24 @@ const AllSpots = () => {
                         </div>
 
                         <label className="input input-bordered flex items-center gap-2 w-full">
-                            <input type="text" className="grow" placeholder="Search" />
+                            <input type="text" onChange={e => setSearch(e.target.value)} className="grow" placeholder="Search" />
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                         </label>
-                        <div className="flex border-2 rounded-xl items-center gap-2 w-full" >
-                            <select className="select  mx-auto flex w-full items-center justify-between rounded-xl bg-white px-6  ">
-                                <div className="px-6 py-2 text-gray-500 hover:bg-gray-100" ><option disabled selected>Sorted By Price</option></div>
-                                <option value="Tourist" >Minimum  to Maximum Price</option>
-                                <option value="tourGuide" >Maximum to Minimum Price</option>
-                            </select>
+
+                        <div className="w-full" >
+                            <h2 className="text-[17px] text-gray-500" >Sort by Price</h2>
+                            <div className=" border-2 rounded-xl items-center gap-2 w-full" >
+                                <select onChange={e => setSort(e.target.value)} className="select  mx-auto flex w-full items-center justify-between rounded-xl bg-white px-6  ">
+                                    <div className="px-6 py-2 text-gray-500 hover:bg-gray-100" ><option disabled selected>Sorted By Price</option></div>
+                                    <option value="minimum" >High</option>
+                                    <option value="maximum" >Low</option>
+                                </select>
+                            </div>
                         </div>
-                        <div className="flex border-2 rounded-xl items-center gap-2 w-full" >
+
+                        <div className="w-full" >
+                            <h2 className="text-[17px] text-gray-500" >Filter by Category</h2>
+                            <div className=" border-2 rounded-xl items-center gap-2 w-full" >
                             <select onChange={e => setCategory(e.target.value)} className="select  mx-auto flex w-full items-center justify-between rounded-xl bg-white px-6  ">
                                 <div className="px-6 py-2 text-gray-500 hover:bg-gray-100" ><option disabled selected>Filter By Category</option></div>
                                 <option value="Wildlife" >Wildlife</option>
@@ -78,6 +87,9 @@ const AllSpots = () => {
                                 <option value="" >All Data</option>
                             </select>
                         </div>
+                        </div>
+
+                      
 
 
                     </div>

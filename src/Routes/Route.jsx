@@ -24,6 +24,7 @@ import MyWishlist from "../Pages/DashboardPage/TouristDashboard/MyWishlist";
 import AddStory from "../Pages/DashboardPage/TouristDashboard/AddStory";
 import TourTypePage from "../Pages/Home/TourTypePage";
 import AllSpots from "../Pages/AllSpots/AllSpots";
+import BlogsDetails from "../Pages/Blogs/BlogsDetails";
 
   
 const router = createBrowserRouter([
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
         {
             path: '/blogs',
             element: <Blogs></Blogs>
+        },
+        {
+            path: '/blog/:id',
+            element: <BlogsDetails></BlogsDetails>
         },
         {
             path: '/aboutUs',
