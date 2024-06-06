@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import router from './Routes/Route';
 import AuthProvider from './provider/AuthProvider';
+import { NextUIProvider } from "@nextui-org/react";
 
 import {
   useQuery,
@@ -29,9 +30,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />       
-        <ToastContainer />
-        <Toaster />
+        <NextUIProvider>
+          <RouterProvider router={router} />
+          <ToastContainer />
+          <Toaster />
+        </NextUIProvider>
+
       </AuthProvider>
     </QueryClientProvider>
 

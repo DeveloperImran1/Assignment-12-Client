@@ -4,10 +4,13 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
+import { MdArrowOutward } from "react-icons/md";
+import { IoMdArrowRoundForward } from "react-icons/io";
 
 const OurPackagesCard = ({ spot, loading }) => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [hoverd, setHoverd] = useState(false);
     const wishListError = () => toast.error("Please Before Login!");
     const wishListExist = () => toast.error("Already Tou Added This Wishlist!");
     const wishListSuccess = () => toast("Successfully added Wishlist!");
@@ -40,9 +43,9 @@ const OurPackagesCard = ({ spot, loading }) => {
         }
 
     }
-  
-    if(loading){
-        return  <div className=" p-6 rounded-md bg-white shadow-md mx-auto max-w-fit">
+
+    if (loading) {
+        return <div className=" p-6 rounded-md bg-white shadow-md mx-auto max-w-fit">
             <div className="animate-pulse">
                 {/* Product Image Skeleton */}
                 <div className="w-[300px] lg:h-52 md:h-52 h-48 rounded-lg bg-gray-300 mb-6"></div>
@@ -67,24 +70,31 @@ const OurPackagesCard = ({ spot, loading }) => {
             <div className="mt-6 mb-2">
                 <div className="flex justify-between">
                     <h2 className="text-xl font-semibold tracking-wide text-[#076aa5]">{tripTitle}</h2>
-                   {
-                    wishListAdded ?  <FaHeart onClick={handleWishlist} size={25} className="text-red-500 cursor-pointer" ></FaHeart> :  <FaHeart onClick={handleWishlist} size={25} className="text-blue-400 cursor-pointer" ></FaHeart>
-                   }
-                   
+                    {
+                        wishListAdded ? <FaHeart onClick={handleWishlist} size={25} className="text-red-500 cursor-pointer" ></FaHeart> : <FaHeart onClick={handleWishlist} size={25} className="text-blue-400 cursor-pointer" ></FaHeart>
+                    }
+
                 </div>
             </div>
-             
-            <button className="hidden md:flex">
-            <Link to={`/spot/${_id}`} className="w-[150px] lg:w-[100px] text-center  text-[17px] font-semibold px-[3px] lg:px-3.5 py-2  overflow-hidden relative group cursor-pointer border-2  border-[#076aa5] text-[#076aa5] hover:text-white rounded-tr-[25px] rounded-bl-[25px] group-hover:rounded-[25px] ease-in duration-300">
+
+            <div className="flex justify-between items-center">
+                <Link to={`/allSpots`} className="w-[150px] lg:w-[100px] text-center  text-[13px] font-semibold px-[3px] lg:px-3.5 py-2  overflow-hidden relative group cursor-pointer border-2  border-[#076aa5] text-[#076aa5] hover:text-white rounded-tr-[25px] rounded-bl-[25px] group-hover:rounded-[25px] ease-in duration-300">
                     <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#076aa5] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
-                    <span className="relative text-[#076aa5] transition duration-300 group-hover:text-white ease">Details</span>
-                    </Link>
-            </button>
-        
-            </div > 
+                    <span className="relative text-[#076aa5] transition duration-300 group-hover:text-white ease">All Package</span>
+                </Link>
+
+                <Link to={`/spot/${_id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#076aa5] border-[#076aa5] hover:text-white ease-in duration-300" >
+                    {
+                        hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
+
+                    }
+                </Link>
+            </div>
+
+        </div >
 
 
-       
+
     );
 };
 

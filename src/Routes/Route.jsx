@@ -23,6 +23,7 @@ import MyBooking from "../Pages/DashboardPage/TouristDashboard/MyBooking";
 import MyWishlist from "../Pages/DashboardPage/TouristDashboard/MyWishlist";
 import AddStory from "../Pages/DashboardPage/TouristDashboard/AddStory";
 import TourTypePage from "../Pages/Home/TourTypePage";
+import AllSpots from "../Pages/AllSpots/AllSpots";
 
   
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
         {
             path: '/spot/:id',
             element: <PackageDetails></PackageDetails>
+        },
+        {
+            path: '/allSpots',
+            element: <AllSpots></AllSpots>
         },
         {
             path: '/tourGuide/:id',
