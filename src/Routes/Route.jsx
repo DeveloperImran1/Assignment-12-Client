@@ -25,6 +25,7 @@ import AddStory from "../Pages/DashboardPage/TouristDashboard/AddStory";
 import TourTypePage from "../Pages/Home/TourTypePage";
 import AllSpots from "../Pages/AllSpots/AllSpots";
 import BlogsDetails from "../Pages/Blogs/BlogsDetails";
+import NormalUserProfile from "../Components/NormalUserProfile";
 
   
 const router = createBrowserRouter([
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
         {
             path: '/tourGuide/:id',
             element: <TourGuideDetails></TourGuideDetails>
+        },
+        {
+            path: '/userProfile/:email',
+            element: <NormalUserProfile></NormalUserProfile>
         },
         {
             path: '/spotCategory/:category',

@@ -1,17 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useRoleCollect from "../hooks/useRoleCollect";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
-const TouristProfile = () => {
-    const { user, loading } = useAuth();
-    const { userRole } = useRoleCollect();
-
-    if (loading) {
+const NormalUserProfile = () => {
+    const axiosPublic = useAxiosPublic();
+    const { email } = useParams();
+    const { data: user = {}, refetch, isLoading } = useQuery({
+        queryKey: ['normalUserProfile', email],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/user/${email}`)
+            return res.data;
+        }
+    })
+console.log(user)
+    if (isLoading) {
         return <div className="w-10 h-10 animate-[spin_2s_linear_infinite] rounded-full border-4 border-dashed border-sky-600"></div>
 
     }
 
-    const { displayName, photoURL, email } = user;
+    const { userName , userPhoto, userEmail, userRole  } = user;
 
     console.log(user)
 
@@ -30,16 +40,16 @@ const TouristProfile = () => {
                 {/* profile image & bg  */}
                 <div className="relative">
                     <img className="w-full h-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
-                    <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={photoURL || "https://source.unsplash.com/300x300/?profile"} alt="card navigate ui" />
+                    <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={userPhoto || "https://source.unsplash.com/300x300/?profile"} alt="card navigate ui" />
                 </div>
                 <div className="flex items-center justify-center z-10 ">
-                <span className="text-white bg-[#0095FF] rounded-md px-2 z-10" >{userRole}</span>
+                    <span className="text-white bg-[#0095FF] rounded-md px-2 z-10" >{userRole}</span>
                 </div>
-                   
+
                 {/* profile name & role */}
                 <div className=" text-center space-y-1">
-                    <h1 className="text-xl md:text-2xl">{displayName || "name not found"}</h1>
-                    <p className="text-gray-400 text-sm">{email || "ih9066588@gmail.com"}</p>
+                    <h1 className="text-xl md:text-2xl">{user?.userName || "name not found"}</h1>
+                    <p className="text-gray-400 text-sm">{userEmail || "ih9066588@gmail.com"}</p>
                 </div>
                 <div className="pt-3 text-center space-y-1">
                     <h1 className="text-xl font-bold md:text-2xl">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ </h1>
@@ -51,11 +61,11 @@ const TouristProfile = () => {
                     <div className="flex w-full justify-between gap-4 py-2">
                         {svgs?.map((svg, idx) => (<div key={idx} className="rounded-full shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)]  duration-300 hover:scale-150">{svg?.svg}</div>))}
                     </div>
-                    <NavLink to="/updateProfile" className="w-full flex items-center justify-center">
+                    <div onClick={()=> toast.success('Send Your Request.')} className="w-full pointer flex items-center justify-center">
                         <button className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[80%] mx-auto py-2 mt-7 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
-                            Update Profile
+                            Add Friend
                         </button>
-                    </NavLink>
+                    </div>
                 </div>
             </div>
 
@@ -63,4 +73,4 @@ const TouristProfile = () => {
     );
 };
 
-export default TouristProfile;
+export default NormalUserProfile;

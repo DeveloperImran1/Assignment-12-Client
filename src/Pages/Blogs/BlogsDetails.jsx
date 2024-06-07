@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { formatDistanceToNow } from "date-fns";
 import { MdComment } from "react-icons/md";
-import BlogReview from "./BlogReview";
 
 
 
@@ -205,12 +204,12 @@ const BlogsDetails = () => {
                             blog?.comments.map((comment, index) => <div key={index} className="mb-7 border-b-2" >
                                 <div className="flex justify-between p-4 ">
                                     <div className="flex space-x-4">
+                                        <Link to={`/userProfile/${comment?.email}`} >
+                                            <img src={` ${comment?.photoURL || "https://source.unsplash.com/100x100/?portrait"}`} alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500" />
+                                        </Link>
                                         <div>
-                                            <img src={` ${blog?.userProfileImage || "https://source.unsplash.com/100x100/?portrait"}`} alt="" className="object-cover w-12 h-12 rounded-full dark:bg-gray-500" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold">{blog?.userName}</h4>
-                                            <span className="text-xs dark:text-gray-600"> {blog?.date && formatDistanceToNow(new Date(blog?.date))} ago</span>
+                                            <h4 className="font-bold">{comment?.userName}</h4>
+                                            <span className="text-xs dark:text-gray-600"> {comment?.date && formatDistanceToNow(new Date(comment?.date))} ago</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center space-x-2 dark:text-yellow-700 pointer ">
