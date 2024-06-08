@@ -96,9 +96,9 @@ const PackageDetailsInfo = ({ packageInfo }) => {
                             className="mySwiper"
                         >
                             {/* <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src={image} /> </SwiperSlide> */}
-                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src="https://i.ibb.co/YBJM4Z4/folio-img3-1536x960.jpg" /> </SwiperSlide>
-                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src="https://i.ibb.co/DGDD1bG/folio-img4-q1mix2zqnzajhubhq281n0nchz2v2kilewhqjkk3yo.jpg" /> </SwiperSlide>
-                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src="https://i.ibb.co/G0L2fZJ/folio-img5-q1mizdpjdefrvizcb1z7qfrwrvr5vxmz29wgrx5gr4-1.jpg" /> </SwiperSlide>
+                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src={spotPhoto?.[0]}  /> </SwiperSlide>
+                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src={spotPhoto?.[1]}  /> </SwiperSlide>
+                            <SwiperSlide><img alt="card navigate ui" className="w-full h-[400px] object-cover  rounded-lg " src={spotPhoto?.[2]}  /> </SwiperSlide>
 
                         </Swiper>
                     </div>

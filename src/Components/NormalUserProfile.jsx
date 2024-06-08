@@ -39,7 +39,7 @@ console.log(user)
             <div className="max-w-[400px] md:w-[450px] p-4 md:p-6  rounded-2xl space-y-5  bg-base-200    shadow-lg group transition border-2  hover:scale-105 border-primary hover:border-secondary border-opacity-30 hover:no-underline focus:no-underline">
                 {/* profile image & bg  */}
                 <div className="relative">
-                    <img className="w-full h-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
+                    <img className="w-full h-[200px] rounded-2xl bg-gray-500" src="https://i.ibb.co/WzLFn0N/bg-3-2.jpg" alt="card navigate ui" />
                     <img className="w-[100px] h-[100px] absolute -bottom-10 left-1/2 -translate-x-1/2 rounded-full bg-gray-400 border border-white" src={userPhoto || "https://source.unsplash.com/300x300/?profile"} alt="card navigate ui" />
                 </div>
                 <div className="flex items-center justify-center z-10 ">

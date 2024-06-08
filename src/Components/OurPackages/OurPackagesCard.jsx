@@ -63,7 +63,7 @@ const OurPackagesCard = ({ spot, loading }) => {
     return (
 
         <div className=" p-6 dark:bg-gray-50 relative group dark:text-gray-900 border hover:border-2 hover:border-[#076aa5] rounded-tr-[38px] rounded-bl-[38px] hover:rounded-[38px] ease-in duration-300">
-            <img src="https://source.unsplash.com/random/300x300/?1" alt="" className="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500 rounded-tr-[38px] rounded-bl-[38px] group-hover:rounded-[38px] ease-in duration-300" />
+            <img src={spotPhoto?.[0]} alt="" className="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500 rounded-tr-[38px] rounded-bl-[38px] group-hover:rounded-[38px] ease-in duration-300" />
             <span className="bg-[#076aa5] absolute top-6 text-white text-[20px] font-medium px-3 py-2  rounded-tr-[25px] rounded-bl-[25px] group-hover:rounded-[25px] ease-in duration-300" >{tripName}</span>
             <span className="bg-[#076aa5] absolute bottom-[130px] text-white text-[20px] font-medium px-3 py-2  rounded-tr-[25px] rounded-bl-[25px] group-hover:rounded-[25px] ease-in duration-300" >{tourType}</span>
             <span className="bg-[#076aa5] absolute bottom-[130px] right-6 text-white text-[20px] font-medium px-3 py-2  rounded-tr-[25px] rounded-bl-[25px] group-hover:rounded-[25px] ease-in duration-300" >${price}</span>

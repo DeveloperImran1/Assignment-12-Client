@@ -120,7 +120,6 @@ const BlogsCard = ({ blog }) => {
                 <Link  to={`/blog/${_id}`} onMouseEnter={() => setHoverd(true)} onMouseLeave={() => setHoverd(false)} className="border-2 icon-container rounded-full p-1 hover:bg-[#076aa5] border-[#076aa5] hover:text-white ease-in duration-300" >
                     {
                         hoverd ? <IoMdArrowRoundForward size={22} className="icon-hover ease-in duration-300" ></IoMdArrowRoundForward> : <MdArrowOutward size={22} className="icon-default ease-in duration-300" ></MdArrowOutward>
-
                     }
                 </Link>
             </div>

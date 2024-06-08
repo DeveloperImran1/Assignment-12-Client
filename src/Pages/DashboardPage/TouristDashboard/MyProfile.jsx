@@ -14,9 +14,12 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useState } from "react";
 import UpdateProfileModal from "../../../Components/Modal/UpdateProfileModal";
 import useRoleCollect from "../../../hooks/useRoleCollect";
+import AddPostModal from "../../../Components/Modal/AddPostModal";
+
 const MyProfile = () => {
     const { user } = useAuth();
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const [addPostIsOpen, setAddPostIsOpen] = useState(false)
     const { userRole } = useRoleCollect()
 
     const modalHandler = () => {
@@ -27,8 +30,20 @@ const MyProfile = () => {
     const closeModal = () => {
         setIsOpen(false)
     }
+
+    // post add korar modal
+    const addPostModalHandler = () => {
+        console.log('moda open kor')
+        setAddPostIsOpen(true)
+
+    }
+    const addPostCloseModal = () => {
+        setAddPostIsOpen(false)
+    }
     return (
         <div className="border-[6px] border-[#c8c4b9] rounded-[21px]" >
+                  <AddPostModal isOpen={addPostIsOpen} closeModal={addPostCloseModal} modalHandler={addPostModalHandler}></AddPostModal>
+
             <UpdateProfileModal modalHandler={modalHandler} closeModal={closeModal} isOpen={isOpen} ></UpdateProfileModal>
             <div id="profile" className="flex justify-center  items-center relative ">
 
@@ -80,8 +95,8 @@ const MyProfile = () => {
 
                         </Swiper>
                     </div>
-                    <div className="bg-[#e1e2e4] flex flex-col justify-center items-center rounded-lg" >
-                        <img className="h-[120px] w-[120px] rounded-lg" src=" https://i.ibb.co/R7Z4WcF/cartoon-character-with-face-81048-29355-removebg-preview.png" alt="" />
+                    <div onClick={addPostModalHandler} className="bg-[#e1e2e4] cursor-pointer flex flex-col justify-center items-center rounded-lg" >
+                        <img  className="h-[120px] w-[120px] rounded-lg" src=" https://i.ibb.co/R7Z4WcF/cartoon-character-with-face-81048-29355-removebg-preview.png" alt="" />
                         <p className="font-bold text-3xl text-[#002366]" >Add Post</p>
                     </div>
                     <div className="bg-[#e1e2e4] flex flex-col justify-center items-center rounded-lg" >
