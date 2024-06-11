@@ -14,56 +14,83 @@ import { imageUpload } from '../../api/utils'
 import useAuth from '../../hooks/useAuth';
 
 
-const UpdateProfileModal = ({ closeModal, isOpen, modalHandler }) => {
+const UpdatePostModal = ({ closeModal, isOpen, modalHandler, refetch, story }) => {
 
     const [errorMessage, setErrorMessage] = useState("");
-    const [photo, setPhoto] = useState('')
+    const [photo, setPhoto] = useState(story?.spotPhoto)
     const [imagePreview, setImagePrevew] = useState('')
     const [imageText, setImageText] = useState('')
+    const axiosSecure = useAxiosSecure();
 
 
-
+    console.log(story)
     const handleImagePrevew = e => {
         const image = e.target.files[0];
+        if (!image) {
+            setImageText("Previous Photo")
+            return setImagePrevew(story?.spotPhoto)
+        }
         setImagePrevew(URL.createObjectURL(image));
         setImageText(image.name)
     }
 
 
-    const successfullyUpdate = () => toast.success('Your Profile Updated!')
-    const errorUpdate = () => toast.error('Empty field is not Allowed!')
+    const successfullyUpdated = () => toast.success('Successfully Updated!')
 
     const { user, loading, setLoading, handleUpdateProfile } = useAuth();
 
     const handleSubmit = async e => {
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
+        const title = form.title.value;
+        const description = form.description.value;
         const image = form.photo.files[0];
-
-        if(!name || !image){
-            return errorUpdate();
-        }
 
         // image k upload korbo imagebb te
         try {
-            const data = await imageUpload(image)
-            setPhoto(data)
+            if (image) {
+                const data = await imageUpload(image)
+                setPhoto(data)
+            }
         }
         catch (err) {
             console.log(err)
         }
 
         if (photo) {
-            console.log(name, photo, handleUpdateProfile)
 
-            handleUpdateProfile(name, photo)
-                .then(result => {
-                    successfullyUpdate();
-                    setPhoto("")
+            // handleUpdateProfile(name, photo)
+            //     .then(result => {
+            //     
+            //     })
+
+            const spotPhoto = photo;
+            const spotTitle = title;
+            const spotDescription = description;
+            const userName = user?.displayName;
+            const userEmail = user?.email;
+            const userPhoto = user?.photoURL;
+            const postDate = story?.postDate || new Date();
+            const comments = story?.comments || [];
+
+
+            const addPostObj = { spotPhoto, spotTitle, spotDescription, userName, userEmail, userPhoto, postDate, comments }
+            console.log(addPostObj)
+
+            setLoading(true)
+            axiosSecure.patch(`/storys/${story?._id}`, addPostObj)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.modifiedCount) {
+                        successfullyUpdated();
+                        setPhoto("")
+                        refetch();
+                       
+                    }
                     setLoading(false)
                     closeModal()
                 })
+
         }
 
 
@@ -101,13 +128,9 @@ const UpdateProfileModal = ({ closeModal, isOpen, modalHandler }) => {
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
-                                    Update Now Your Profile!
+                                    What is Your Experience..
                                 </DialogTitle>
-                                <div className='mt-2'>
-                                    <p className='text-sm text-gray-500'>
-                                        Please Name and Photo
-                                    </p>
-                                </div>
+
                                 <hr className='mt-8 ' />
                                 {
                                     imagePreview && <div>
@@ -118,8 +141,13 @@ const UpdateProfileModal = ({ closeModal, isOpen, modalHandler }) => {
 
 
                                     <label className="block mb-3">
-                                        <span className="mb-1">New Name</span>
-                                        <input type="text" placeholder="New Name" name='name' className="block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
+                                        <span className="mb-1">Post Title</span>
+                                        <input defaultValue={story?.spotTitle} type="text" placeholder="Post Title here" name='title' className="block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
+                                    </label>
+
+                                    <label className="block mb-3">
+                                        <span className="mb-1">Description</span>
+                                        <textarea defaultValue={story?.spotDescription} name='description' className="textarea block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100" placeholder="Add Your Experience"></textarea>
                                     </label>
                                     <div className="space-y-2 text-sm">
                                         <div className="text-left  " >
@@ -160,4 +188,4 @@ const UpdateProfileModal = ({ closeModal, isOpen, modalHandler }) => {
 }
 
 
-export default UpdateProfileModal;
+export default UpdatePostModal;

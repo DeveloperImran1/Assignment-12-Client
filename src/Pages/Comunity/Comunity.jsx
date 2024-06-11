@@ -7,7 +7,14 @@ import { useState } from "react";
 
 const Comunity = () => {
     const axiosPublic = useAxiosPublic();
-    const { data: cardStorys = [] } = useQuery({
+    const [search, setSearch] = useState("")
+
+    const handleSearch = (searchText) => {
+        setSearch(searchText)
+    }
+
+
+    const { data: cardStorys = [], refetch: cardRefetch } = useQuery({
         queryKey: ["cardStorys"],
         queryFn: async () => {
             const res = await axiosPublic.get('/cardStorys')
@@ -16,19 +23,19 @@ const Comunity = () => {
     })
 
     const { data: storys = [], refetch } = useQuery({
-        queryKey: ['posts'],
+        queryKey: ['posts', search],
         queryFn: async () => {
-            const res = await axiosPublic.get('/storys');
+            const res = await axiosPublic.get(`/storys?search=${search}`);
             return res.data;
         }
     })
-    
+
     return (
         <div>
             <div>
-                <PostNow refetch={refetch}></PostNow>
+                <PostNow refetch={refetch} handleSearch={handleSearch}></PostNow>
                 <div className="my-8" >
-                    <StorySlider cardStorys={cardStorys} ></StorySlider>
+                    <StorySlider cardStorys={cardStorys} cardRefetch={cardRefetch} ></StorySlider>
                 </div>
             </div>
 

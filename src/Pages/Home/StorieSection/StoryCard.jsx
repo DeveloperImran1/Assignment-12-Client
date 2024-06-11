@@ -18,6 +18,7 @@ import {
 import {
     FacebookIcon,
 } from "react-share";
+import UpdatePostModal from "../../../Components/Modal/UpdatePostModal";
 
 
 const StoryCard = ({ story, refetch }) => {
@@ -27,6 +28,7 @@ const StoryCard = ({ story, refetch }) => {
     const [clients, setClients] = useState([])
     const [hoverd, setHoverd] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [updatePostOpen, updatePostSetIsOpen] = useState(false);
     const reviewSuccess = () => {
         toast.success("Successfully Posted Comment!")
     }
@@ -62,6 +64,10 @@ const StoryCard = ({ story, refetch }) => {
             return reviewError();
         }
 
+        if(!user){
+            return  toast.error('Please Before Login now!')
+        }
+
         const commentObj = { message, email, photoURL, date, userName }
         console.log(commentObj)
         axiosSecure.patch(`/storyComment/${_id}`, commentObj)
@@ -86,12 +92,24 @@ const StoryCard = ({ story, refetch }) => {
         setIsOpen(false)
     }
 
+
+    // updatePost Modal
+    const updatePostModalHandler = () => {
+        console.log('moda open kor')
+        updatePostSetIsOpen(true)
+
+    }
+    const updatePostOnClose = () => {
+        updatePostSetIsOpen(false)
+    }
+
     return (
         <div>
 
             <StoryDetailsModal isOpen={isOpen} closeModal={onClose} modalHandler={modalHandler} story={story} ></StoryDetailsModal>
+            <UpdatePostModal isOpen={updatePostOpen} closeModal={updatePostOnClose} modalHandler={updatePostModalHandler} refetch={refetch} story={story} ></UpdatePostModal>
 
-            <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800">
+            <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-50 dark:text-gray-800 mx-auto ">
                 <div className="flex items-center justify-between p-3">
                     <Link to={`/userProfile/${userEmail || 'ih9066588@gmail.com'}`} className="flex items-center space-x-2">
                         <img src={`${userPhoto || "https://source.unsplash.com/50x50/?portrait"}`} alt="" className="object-cover object-center w-[50px] h-[50px] rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300" />
@@ -111,7 +129,7 @@ const StoryCard = ({ story, refetch }) => {
 
                             {
                                 userEmail === user?.email ? <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li> <Link>Edit Post</Link> </li>
+                                    <li> <Link onClick={updatePostModalHandler} >Edit Post</Link> </li>
                                     <li> <Link onClick={() => handleDelte(_id)} >Delete Post</Link> </li>
                                     <li>  <FacebookShareButton className="flex gap-2" url={`${window.location.origin}${window.location.pathname}`} quote={"Hey explore this npm"} hashtag="#react" ></FacebookShareButton>  </li>
                                 </ul> : <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

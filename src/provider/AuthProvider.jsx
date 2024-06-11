@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic()
-
+const [confettiValue, setConfettiValue] = useState(false)
     // user create
     const register = (email, password) => {
         setLoading(true);
@@ -70,10 +70,9 @@ const AuthProvider = ({ children }) => {
     }
 
 
-    // tourist booking page refetch
-    // const handleTouristBookingRefetch = (bookingFetech)=> {
-    //     setBookingRefetch(bookingFetech)
-    // }
+    const confetti = (value)=> {
+        setConfettiValue(value)
+    }
 
 
 
@@ -109,7 +108,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile,  }
+    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile, confetti,  confettiValue  }
 
     return (
         <AuthContext.Provider value={authInfo}>

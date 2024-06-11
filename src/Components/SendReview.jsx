@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 import {
@@ -17,6 +17,7 @@ import {
 import { Fragment } from 'react'
 import toast from 'react-hot-toast';
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
 
 
 
@@ -54,23 +55,44 @@ const SendReview = ({ modalHandler, isOpen, closeModal, userEmail, refetch }) =>
     const userName = user?.displayName;
     const photoURL = user?.photoURL;
     const date = new Date();
+    const navigate = useNavigate();
 
+    // get current user data in DB
+    const {data: currentUser = {}} = useQuery({
+        queryKey: ['curentUser', user],
+        queryFn: async()=> {
+            const res = await axiosPublic.get(`/user/${user?.email}`)
+            return res.data;
+        }
+    })
+    console.log(currentUser)
 
     // handle Review Post
     const handleReview = (e) => {
         e.preventDefault();
+
+        if (!user) {
+            toast.error("Please Before Login Our Website!")
+            return navigate("/login")
+            
+        }
+
+        if(!currentUser?.totalBooking){
+            return toast.error("Please Before Booking a Package!")
+        }
+
         const message = e.target.message.value;
         const reviewObj = { message, rating, touristEmail, photoURL, date, userName }
         console.log(reviewObj)
-       axiosPublic.patch(`/review/${userEmail}`, reviewObj)
-       .then(res => {
-        console.log(res.data)
-        if(res?.data?.modifiedCount){
-            reviewSuccess()
-            refetch()
-            closeModal()
-        }
-       })
+        axiosPublic.patch(`/review/${userEmail}`, reviewObj)
+            .then(res => {
+                console.log(res.data)
+                if (res?.data?.modifiedCount) {
+                    reviewSuccess()
+                    refetch()
+                    closeModal()
+                }
+            })
     }
 
 
@@ -139,7 +161,7 @@ const SendReview = ({ modalHandler, isOpen, closeModal, userEmail, refetch }) =>
                                         </div>
                                     </div>
                                     <form onSubmit={handleReview} className="flex text-white  flex-col w-full">
-                                    
+
                                         <textarea required name="message" rows="3" placeholder="Message..." className="p-4 border-2 rounded-md resize-none text-black dark:text-gray-800 dark:bg-gray-50" spellcheck="false"></textarea>
                                         <button type="submit" className="py-4 my-8 font-semibold rounded-md dark:text-gray-50 bg-violet-600">Submit Feedback</button>
                                     </form>

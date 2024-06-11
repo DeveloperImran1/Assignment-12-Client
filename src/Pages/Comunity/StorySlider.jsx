@@ -13,11 +13,13 @@ import { formatDistanceToNow } from 'date-fns';
 import { Link } from 'react-router-dom';
 import StoryDetailsModal from '../../Components/Modal/StoryDetailsModal';
 import CardStoryModal from '../../Components/Modal/CardStoryModal';
+import AddStory from '../../Components/Modal/AddStory';
 
 
-const StorySlider = ({ cardStorys }) => {
-const [isOpen, setIsOpen] = useState(false)
-    
+const StorySlider = ({ cardStorys, cardRefetch }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [addStoryIsOpen, setStoryPostIsOpen] = useState(false);
+
     const modalHandler = () => {
         console.log('moda open kor')
         setIsOpen(true)
@@ -27,9 +29,19 @@ const [isOpen, setIsOpen] = useState(false)
         setIsOpen(false)
     }
 
+    // Story add korar modal
+    const addStoryModalHandler = () => {
+        console.log('moda open kor')
+        setStoryPostIsOpen(true)
+
+    }
+    const addStoryCloseModal = () => {
+        setStoryPostIsOpen(false)
+    }
     return (
         <div>
-               
+            <AddStory isOpen={addStoryIsOpen} closeModal={addStoryCloseModal} modalHandler={addStoryModalHandler} refetch={cardRefetch}></AddStory>
+
             <Swiper
                 slidesPerView={6}
                 // spaceBetween={30}
@@ -40,7 +52,7 @@ const [isOpen, setIsOpen] = useState(false)
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <div className='w-[200px] h-[300px] rounded-2xl flex flex-col' >
+                    <div onClick={addStoryModalHandler} className='w-[200px] h-[300px] rounded-2xl flex flex-col' >
                         <img className='h-[70%] rounded-t-2xl cursor-pointer ' src="https://i.ibb.co/b2MMXhL/129074-Cebu-Island.jpg" alt="" />
                         <div className='bg-gray-300 h-[30%] relative rounded-b-2xl flex items-center justify-center' >
                             <p className='text-[18px] font-bold text-black' >Add Story</p>
@@ -52,14 +64,14 @@ const [isOpen, setIsOpen] = useState(false)
                     </div>
                 </SwiperSlide>
 
-                {cardStorys?.map(story => <SwiperSlide key={story?._id} onClick={modalHandler} >
+                {cardStorys?.slice().reverse().map(story => <SwiperSlide key={story?._id} onClick={modalHandler} >
                     <CardStoryModal isOpen={isOpen} closeModal={onClose} modalHandler={modalHandler} story={story} ></CardStoryModal>
 
                     <div className='w-[200px] h-[300px] relative rounded-2xl ' >
                         <img className='cursor-pointer rounded-2xl h-full' src={story?.spotPhoto} alt="" />
 
-                        <Link  to={`/userProfile/${story?.userEmail}`} >
-                        <img className="w-[45px] cursor-pointer absolute top-2 left-2 h-[45px] rounded-full border-4 border-[#0866ff] " src={story?.userPhoto}  alt="" />
+                        <Link to={`/userProfile/${story?.userEmail}`} >
+                            <img className="w-[45px] cursor-pointer absolute top-2 left-2 h-[45px] rounded-full border-4 border-[#0866ff] " src={story?.userPhoto} alt="" />
                         </Link>
                         {/* <span className="absolute top-2 left-[64px] leading-none text-white ">{
              formatDistanceToNow(new Date(new Date()))} ago</span> */}

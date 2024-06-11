@@ -43,7 +43,7 @@ const TourGuideDetails = () => {
             <div className="mx-auto my-20 max-w-[550px] space-y-8 rounded-2xl bg-white px-6 py-8 shadow-md dark:bg-[#18181B] md:max-w-[550px]">
                 {/* profile image & bg  */}
                 <div className="relative ">
-                    <img height={200} className="h-[200px] w-full rounded-2xl bg-gray-500" src="https://source.unsplash.com/350x150/?northern lights" alt="card navigate ui" />
+                    <img height={200} className="h-[200px] w-full rounded-2xl bg-gray-500" src="https://i.ibb.co/WzLFn0N/bg-3-2.jpg" alt="card navigate ui" />
                     <img width={150} height={150} className="absolute -bottom-12 left-1/2 h-[150px] w-[150px] -translate-x-1/2 rounded-full border-4 border-white bg-gray-400 dark:border-[#18181B]" src={userPhoto || "https://source.unsplash.com/100x100/?men"} alt="card navigate ui" />
                 </div>
                 <div className="flex items-center justify-center z-10 ">

@@ -32,6 +32,7 @@ const AddPostModal = ({ closeModal, isOpen, modalHandler, refetch }) => {
 
 
     const successfullyPosted = () => toast.success('Successfully Posted!')
+    const errorPost = () => toast.error('Please Fillup all Info!')
 
     const { user, loading, setLoading, handleUpdateProfile } = useAuth();
 
@@ -41,6 +42,14 @@ const AddPostModal = ({ closeModal, isOpen, modalHandler, refetch }) => {
         const title = form.title.value;
         const description = form.description.value;
         const image = form.photo.files[0];
+
+        if(!user){
+            return toast.error('Please Before Login now!')
+        }
+
+        if(!title || !description || !image){
+            errorPost()
+        }
 
         // image k upload korbo imagebb te
         try {
@@ -121,13 +130,9 @@ const AddPostModal = ({ closeModal, isOpen, modalHandler, refetch }) => {
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
-                                    Update Now Your Profile!
+                                    What is Your Experience..
                                 </DialogTitle>
-                                <div className='mt-2'>
-                                    <p className='text-sm text-gray-500'>
-                                        Please Name and Photo
-                                    </p>
-                                </div>
+                         
                                 <hr className='mt-8 ' />
                                 {
                                     imagePreview && <div>

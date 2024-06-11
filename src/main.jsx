@@ -24,7 +24,7 @@ const queryClient = new QueryClient()
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Toaster } from 'react-hot-toast';
-
+import Confetti from '../src/hooks/Confetti'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -35,6 +35,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ToastContainer />
           <Toaster />
         </NextUIProvider>
+        <Confetti></Confetti>
 
       </AuthProvider>
     </QueryClientProvider>

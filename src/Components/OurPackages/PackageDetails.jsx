@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AllTourGuides from "../AllTourGuides";
 import useAuth from "../../hooks/useAuth";
 
@@ -20,16 +20,18 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import toast, { Toaster } from 'react-hot-toast';
 import OurPackagesCard from "./OurPackagesCard";
 import SeactionTitle from "../SeactionTitle";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+
 
 const PackageDetails = () => {
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { id } = useParams();
-    const { user } = useAuth();
+    const { user, confetti } = useAuth();
     const [startDate, setStartDate] = useState(new Date());
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(true)
-    
-   
+    const navigate = useNavigate();
 
     // get all tour guide name
     useEffect(() => {
@@ -43,7 +45,6 @@ const PackageDetails = () => {
                 setLoading(false)
             })
     }, [axiosPublic])
-    console.log(options)
 
     // dropdown button er jonno
     const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +63,14 @@ const PackageDetails = () => {
         }
     })
 
+    // get user info
+    const { data: userInfo = {} } = useQuery({
+        queryKey: ['userInfo', user],
+        queryFn: async () => {
+            const data = await axiosPublic.get(`/user/${user?.email}`)
+            return data.data;
+        }
+    })
 
     const { _id, aboutOfSpots, location, price, seasonality, spotPhoto, spotVideo, totalVisitorPerYear, tourPlan, tourType, tripName, tripTime, tripTitle, } = spotDetails;
 
@@ -91,32 +100,65 @@ const PackageDetails = () => {
         const packagePrice = parseInt(price);
         const bookingTime = new Date();
         const bookingStatus = "In Review"
-        const bookingInfo = { name, photo, email, bookingDate, guideName, guideEmail, packagePrice, bookingTime, tripName , spotPhoto, tripTitle, bookingStatus}
+        const bookingInfo = { name, photo, email, bookingDate, guideName, guideEmail, packagePrice, bookingTime, tripName, spotPhoto, tripTitle, bookingStatus }
         // console.log('handle booking callded', bookingInfo)
         console.log('selected value ', selectedValue, selectedEmail)
 
-        if(!bookingDate || !guideName){
-            return toast.error("This didn't work.")
+        if (!user) {
+            navigate('/login')
+            return toast.error("Before Login for Booking!");
+
         }
 
-        axiosPublic.post('/packageBooking', bookingInfo)
+        if (!bookingDate || !guideName) {
+            return toast.error("Please choce Booking Date and Guide Name")
+        }
+
+        axiosSecure.post('/packageBooking', bookingInfo)
             .then(res => {
                 // console.log(res.data)
                 if (res.data.insertedId) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Successfully Submited! Wait for Tour Guide Approval",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+
+
+
+                    if (userInfo?.totalBooking > 2) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "You have earned 30% Discount!",
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+
+                        // stiker porbe
+                        setTimeout(() => {
+                            confetti(true)
+
+                            setTimeout(() => {
+                                confetti(false)
+                            }, 15000);
+                        }, 3000);
+
+                    }
+                    else {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Wait for Tour Guide Approval!",
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+
+
+
+
                 }
             })
     }
     return (
         <div className="w-full lg:w-[85%] mx-auto p-5 border-2 rounded-2xl" >
             <PackageDetailsInfo packageInfo={spotDetails} ></PackageDetailsInfo>
-
             <div className="flex justify-between w-full mt-[60px]" >
                 <div className="flex flex-col gap-5  ">
                     <VerticalLinearStepper tourPlan={tourPlan} ></VerticalLinearStepper>
@@ -143,9 +185,9 @@ const PackageDetails = () => {
 
                 <form onSubmit={handleBooking} className="flex  flex-col px-6 py-8 w-[45%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
                     <div>
-                        <img alt="" className="w-[500px] h-full  rounded-lg shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src={spotPhoto?.[0]}  />
+                        <img alt="" className="w-[500px] h-full  rounded-lg shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src={spotPhoto?.[0]} />
                     </div>
-                        <p className="text-[24px] font-semibold  text-center mt-5 ">Please Fillup This Form </p>
+                    <p className="text-[24px] font-semibold  text-center mt-5 ">Please Fillup This Form </p>
 
 
 
@@ -182,7 +224,7 @@ const PackageDetails = () => {
                         {/* dropdown - options  */}
                         <div className={`${isOpen ? 'visible top-0 opacity-100 relative' : 'invisible absolute -top-4 opacity-0'}  mx-auto my-4 rounded-xl py-4  duration-300 block w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 `}>
                             {options?.map((option, idx) => (
-                                <div key={idx} onClick={() => {setSelectedValue(option?.userName); setSelectedEmail(option?.userEmail) ; setIsOpen(false); }} className="px-6 py-2 text-gray-500 hover:bg-gray-100">
+                                <div key={idx} onClick={() => { setSelectedValue(option?.userName); setSelectedEmail(option?.userEmail); setIsOpen(false); }} className="px-6 py-2 text-gray-500 hover:bg-gray-100">
                                     {option?.userName}
                                 </div>
                             ))}
@@ -199,14 +241,14 @@ const PackageDetails = () => {
 
             <AllTourGuides></AllTourGuides>
 
-          <div className="" >
-            <SeactionTitle name="Related Packages" title="For Your Sujjested Spots" ></SeactionTitle>
-          <div className="grid grid-cols-2 gap-11" >
-                {
-                    relatedSpots.slice(1,3).map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard> )
-                }
+            <div className="" >
+                <SeactionTitle name="Related Packages" title="For Your Sujjested Spots" ></SeactionTitle>
+                <div className="grid grid-cols-2 gap-11" >
+                    {
+                        relatedSpots.slice(1, 3).map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard>)
+                    }
+                </div>
             </div>
-          </div>
 
         </div>
     );

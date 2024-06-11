@@ -78,6 +78,11 @@ const BlogsDetails = () => {
     // handle Review Post
     const handleReview = (e) => {
         e.preventDefault();
+
+        if (!user) {
+            return toast.error("Please Before Login now!")
+        }
+
         const message = e.target.message.value;
         const rating = value;
         const email = user?.email;
