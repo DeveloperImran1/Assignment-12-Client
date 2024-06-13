@@ -124,7 +124,7 @@ const Navbar = () => {
                     {/* Dropdown Menu */}
                     <div className='relative'>
                         <div className='flex relative flex-row z-50 items-center gap-8'>
-                      
+
 
                             <NavLink to='/' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-gray-600'}>
                                 <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
@@ -156,10 +156,10 @@ const Navbar = () => {
                                     <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
                                 </li>
                             </NavLink>
-                          
-                           
-                           
-                          
+
+
+
+
 
                             {/* For notification edit now  */}
 
@@ -244,14 +244,48 @@ const Navbar = () => {
                             </div>
                         </div>
                         {isOpen && (
-                            <div className='absolute rounded-xl shadow-md w-[40vw] md:w-[10vw] bg-white overflow-hidden right-0 top-12 text-sm z-50'>
+                            <div className='absolute rounded-xl shadow-md w-[250px]  bg-white overflow-hidden right-0 top-12 text-sm z-50'>
                                 <div className='flex flex-col cursor-pointer'>
+                                    <div className='flex flex-col justify-center items-center gap-2'>
+                                        <img
+                                            className='rounded-full h-[80px] w-[80px] border-4 p-1'
+                                            referrerPolicy='no-referrer'
+                                            src={user && user.photoURL ? user.photoURL : avatarImg}
+                                            alt='profile' />
+                                            <p className='text-[17px] text-gray-600' >{user && user?.displayName}</p>
+                                            <p className='text-[17px] text-gray-600' >{user && user?.email}</p>
+                                    </div>
                                     <Link
                                         to='/'
-                                        className='block md:hidden px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                        className='block md:hidden px-4 py-3  rounded-lg hover:bg-neutral-100 transition font-semibold'
                                     >
                                         Home
                                     </Link>
+                                    <Link
+                                        to='/comunity'
+                                        className='block md:hidden  rounded-lg px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Comunity
+                                    </Link>
+                                    <Link
+                                        to='/blogs'
+                                        className='block md:hidden  rounded-lg px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Blogs
+                                    </Link>
+                                    <Link
+                                        to='/aboutUs'
+                                        className='block md:hidden  rounded-lg px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        About Us
+                                    </Link>
+                                    <Link
+                                        to='/contactUs'
+                                        className='block md:hidden  rounded-lg px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                    >
+                                        Contact Us
+                                    </Link>
+                                    <hr className='h-6 mt-6' />
 
                                     {user ? (
                                         <>
@@ -286,13 +320,13 @@ const Navbar = () => {
                                         <>
                                             <Link
                                                 to='/login'
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                className='px-4 py-3  rounded-lg hover:bg-neutral-100 transition font-semibold'
                                             >
                                                 Login
                                             </Link>
                                             <Link
                                                 to='/signup'
-                                                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                                                className='px-4 py-3  rounded-lg hover:bg-neutral-100 transition font-semibold'
                                             >
                                                 Sign Up
                                             </Link>

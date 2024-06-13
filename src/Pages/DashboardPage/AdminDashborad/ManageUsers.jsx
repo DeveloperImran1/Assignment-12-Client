@@ -45,7 +45,7 @@ const ManageUsers = () => {
     return (
         <div>
             <SeactionTitle name="All Users" title="Manage Users Role" ></SeactionTitle>
-            <div className="flex justify-center items-center gap-[70px] my-14 " >
+            <div className="flex flex-col md:flex-row justify-center items-center gap-[70px] my-14 " >
                 <div className="border-2 rounded-md" >
                     <select onChange={(e) => setFilterRole(e.target.value)} className="select mx-auto flex w-72 items-center justify-between rounded-xl bg-white px-6  ">
                         <div className="px-6 py-2 text-gray-500 hover:bg-gray-100" ><option disabled selected>Filter With</option></div>
@@ -58,7 +58,7 @@ const ManageUsers = () => {
                 </div>
 
                 <label onChange={(e) => setSearchValue(e.target.value)} className="input input-bordered flex items-center gap-2">
-                    <input type="text" className="grow" placeholder="Search" />
+                    <input type="text" className="grow  w-72" placeholder="Search" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                 </label>
             </div>

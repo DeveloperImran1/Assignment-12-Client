@@ -4,7 +4,7 @@ import { FcSettings } from 'react-icons/fc'
 import { BsFillHouseAddFill } from 'react-icons/bs'
 import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { MdHomeWork } from 'react-icons/md'
 import useAuth from '../../hooks/useAuth'
@@ -20,13 +20,16 @@ import useMyTotalBooking from '../../hooks/useMyTotalBooking'
 import useMyTotalWishList from '../../hooks/useMyTotalWishList'
 import AdminRequestModal from '../Modal/AdminRequestModal'
 import MesengerChat from '../../Pages/Home/MesengerChat'
+import { IoChatbubble } from "react-icons/io5";
+import { BsBackpack4Fill } from "react-icons/bs";
 
 
 const Sidebar = () => {
   const { logOut, loading } = useAuth()
   const [isActive, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
-
+  const {user} = useAuth();
+const navigate = useNavigate();
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive)
@@ -37,15 +40,22 @@ const Sidebar = () => {
 
   const { myTotalBooking, refetch: bookingRefetch } = useMyTotalBooking();
   const { myTotalWishList, refetch: wishListRefetch } = useMyTotalWishList()
-  console.log( "Total bookins", myTotalBooking.result)
-  console.log( "Total wishlist", myTotalWishList.result)
+  console.log("Total bookins", myTotalBooking.result)
+  console.log("Total wishlist", myTotalWishList.result)
+
+  const handleLogout = ()=> {
+    logOut()
+    .then(res => {
+      navigate("/login")
+    })
+  }
 
   const modalHandler = () => {
     console.log('moda open kor')
     setIsOpen(true)
 
   }
-  const onClose = ()=> {
+  const onClose = () => {
     setIsOpen(false)
   }
 
@@ -58,16 +68,21 @@ const Sidebar = () => {
       <div className='bg-gray-100 text-gray-800 flex justify-between md:hidden'>
         <div>
           <div className='block cursor-pointer p-4 font-bold'>
-            <Link to='/'>
+            <Link to='/' className='flex justify-center items-center ' >
               <img
                 // className='hidden md:block'
-                src='https://i.ibb.co/4ZXzmq5/logo.png'
+                src='https://i.ibb.co/xD2TrVn/z3376104only-T-removebg-preview.png'
                 alt='logo'
-                width='100'
-                height='100'
+                width='80'
+                height='80'
               />
+              <h2 className='text-[18px] font-bold hidden lg:flex leading-none dark:text-white' >Tourist<span className='text-[#076aa5]' >Book</span></h2>
+
+
             </Link>
+      
           </div>
+          
         </div>
 
         <button
@@ -86,25 +101,37 @@ const Sidebar = () => {
         <div>
           <div>
             <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-rose-100 mx-auto'>
-              <Link to='/'>
+              <Link to='/' className='flex justify-center items-center ' >
                 <img
                   // className='hidden md:block'
-                  src='https://i.ibb.co/4ZXzmq5/logo.png'
+                  src='https://i.ibb.co/xD2TrVn/z3376104only-T-removebg-preview.png'
                   alt='logo'
-                  width='100'
-                  height='100'
+                  width='80'
+                  height='80'
                 />
+                <h2 className='text-[18px] font-bold hidden lg:flex leading-none dark:text-white' >Tourist<span className='text-[#076aa5]' >Book</span></h2>
+
+
               </Link>
             </div>
           </div>
 
           {/* Nav Items */}
           <div className='flex flex-col justify-between flex-1 mt-6'>
+          <div className='flex flex-col justify-center items-center gap-2'>
+              <img
+                className='rounded-full h-[80px] w-[80px] border-4 p-1'
+                referrerPolicy='no-referrer'
+                src={user && user.photoURL ? user.photoURL : ""}
+                alt='profile' />
+              <p className='text-[17px] text-gray-600' >{user && user?.displayName}</p>
+              <p className='text-[17px] text-gray-600' >{user && user?.email}</p>
+            </div>
             <nav>
               {
                 role === "Admin" && <>
                   <SidebarButton path="/dashboard/admin-profile" icon={CgProfile} name="Profile" ></SidebarButton>
-                  <SidebarButton path="/dashboard/admin-addPackage" icon={BsGraphUp} name="Add Package" ></SidebarButton>
+                  <SidebarButton path="/dashboard/admin-addPackage" icon={BsBackpack4Fill} name="Add Package" ></SidebarButton>
                   <SidebarButton path="/dashboard/admin-manageUsers" icon={BsGraphUp} name="Manage Users" ></SidebarButton>
 
                 </>
@@ -122,7 +149,7 @@ const Sidebar = () => {
                   <SidebarButton path="/dashboard/tourist-myWishlist" icon={FaHeart} name="My Wishlist" color="text-red-500" myTotalWishList={myTotalWishList?.result}></SidebarButton>
                   <SidebarButton path="/dashboard/tourist-addStory" icon={FaHeart} name="Add Stoy" ></SidebarButton>
 
-                  <button onClick={modalHandler} className={ `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 `}>
+                  <button onClick={modalHandler} className={`flex items-center px-4 py-2 my-5 rounded-lg transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 `}>
                     <GrUserAdmin className={`w-5 h-5`}></GrUserAdmin>
                     <span className='mx-4 font-medium'>Request Admin</span>
 
@@ -140,19 +167,17 @@ const Sidebar = () => {
 
           {/* Profile Menu */}
           <NavLink
-            to='/dashboard/profile'
             className={({ isActive }) =>
-              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${isActive ? 'bg-gray-300  text-gray-700' : 'text-gray-600'
-              }`
+              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300 rounded-lg  hover:text-gray-700 }`
             }
           >
-            <FcSettings className='w-5 h-5' />
+            <IoChatbubble className='w-5 h-5' />
 
-            <span className='mx-4 font-medium'>Profile</span>
+            <span className='mx-4 font-medium'>Live Chat</span>
           </NavLink>
           <button
-            onClick={logOut}
-            className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
+            onClick={handleLogout}
+            className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300  rounded-lg hover:text-gray-700 transition-colors duration-300 transform'
           >
             <GrLogout className='w-5 h-5' />
 

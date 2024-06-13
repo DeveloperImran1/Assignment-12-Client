@@ -113,9 +113,9 @@ const MyProfile = () => {
 
                 <div>
 
-                    <div className="grid  grid-cols-4 gap-4 mt-3 border-t-[6px] p-1 border-[#c8c4b9] rounded-[21px]">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-3 border-t-[6px] p-1 border-[#c8c4b9] rounded-[21px]">
 
-                        <div className="col-span-2 row-span-2" >
+                        <div className="lg:col-span-2 lg:row-span-2" >
                             <Swiper
                                 spaceBetween={30}
                                 centeredSlides={true}

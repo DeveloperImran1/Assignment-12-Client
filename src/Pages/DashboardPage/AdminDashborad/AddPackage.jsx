@@ -107,10 +107,10 @@ const AddPackage = () => {
     return (
         <div className="flex justify-center flex-col items-center" > 
         <SeactionTitle name="Add Package" title="If You Need Add New Package" ></SeactionTitle>
-            <form onSubmit={handleSubmit} className="flex  flex-col px-6 py-8 w-[65%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
+            <form onSubmit={handleSubmit} className="flex  flex-col lg:px-6 lg:py-8 w-full lg:w-[65%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
                 <div>
                     {
-                        imagePreview && <img alt="" className="w-[100%] h-[500px]  rounded shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src={imagePreview} />
+                        imagePreview && <img alt="" className="w-[100%] h-[200px] md:h-[300px] lg:h-[500px]  rounded shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src={imagePreview} />
                     }
 
                 </div>
@@ -119,7 +119,7 @@ const AddPackage = () => {
 
 
 
-                <div className="flex justify-between items-center" >
+                <div className="flex flex-col md:flex-row justify-between items-center" >
                     <label className="">
                         <span className="mb-1">Package Name</span>
                         <input type="text" name="tripName" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
@@ -136,14 +136,14 @@ const AddPackage = () => {
                         </div>
                     </label>
                 </div>
-                <div className="flex justify-between items-center" >
+                <div className="flex flex-col md:flex-row justify-between items-center" >
                 
 
-                    <label className="w-[45%]">
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]">
                         <span className="mb-1">Package Title</span>
                         <input type="text" placeholder="Your name" name="tripTitle" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Location</span>
                         <input type="text" name="location" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
@@ -151,10 +151,10 @@ const AddPackage = () => {
 
                 </div>
 
-                <div className="flex justify-between items-center" >
+                <div className="flex flex-col md:flex-row  justify-between items-center" >
              
 
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                     <span className="mb-1">Package Type</span>
                     <select name="tourType" className="  w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
                         <option disabled selected>Pick a Tour Type</option>
@@ -165,7 +165,7 @@ const AddPackage = () => {
                         <option>Air Rides</option>
                     </select>
                 </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Package Type</span>
                         <select name="sessionality" className="  w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
                             <option disabled selected>Pick a Session</option>
@@ -179,12 +179,12 @@ const AddPackage = () => {
 
            
 
-                <div className="flex justify-between" >
-                <label className="w-[45%]" >
+                <div className="flex flex-col md:flex-row  justify-between" >
+                <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Price</span>
                         <input type="number" name="price" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Country</span>
                         <input type="text" value="Bangladesh" name="country" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
@@ -192,12 +192,12 @@ const AddPackage = () => {
 
 
 
-                <div className="flex justify-between" >
-                    <label className="w-[45%]" >
+                <div className="flex flex-col md:flex-row  justify-between" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Trip Time</span>
                         <input type="text" name="tripTime" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Total Visitor</span>
                         <input type="number" name="totalVisitor" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
@@ -206,36 +206,36 @@ const AddPackage = () => {
 
 
 
-                <div className="flex justify-between items-center" >
-                    <label className="w-[45%]" >
+                <div className="flex flex-col md:flex-row  justify-between items-center" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Title 1</span>
                         <textarea type="text" name="planTitle1" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Description 1</span>
                         <textarea type="text" name="planDescription1" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
 
 
                 </div>
-                <div className="flex justify-between items-center" >
-                    <label className="w-[45%]" >
+                <div className="flex flex-col md:flex-row  justify-between items-center" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Title 2</span>
                         <textarea type="text" name="planTitle2" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Description 3</span>
                         <textarea type="text" name="planDescription2" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
 
 
                 </div>
-                <div className="flex justify-between items-center" >
-                    <label className="w-[45%]" >
+                <div className="flex flex-col md:flex-row  justify-between items-center" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Title 3</span>
                         <textarea type="text" name="planTitle3" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>
-                    <label className="w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Plan Description 3</span>
                         <textarea type="text" name="planDescription3" placeholder="Your name" className=" w-full  h-[90px] rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>

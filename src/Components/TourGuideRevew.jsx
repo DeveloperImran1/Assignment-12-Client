@@ -23,8 +23,8 @@ const TourGuideRevew = ({ guideInfo }) => {
                 <SeactionTitle name="Reviews" title="Explore Our Tour Guide Revews" ></SeactionTitle>
 
             </div>
-            <div className="w-[1000px] flex justify-center items-center pointer mt-11" >
-
+            <div className="w-full md:w-[500px] lg:w-[1000px] px-8 lg:px-0 flex justify-center items-center pointer mt-11" >
+ 
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -42,7 +42,7 @@ const TourGuideRevew = ({ guideInfo }) => {
 
                     {
                         guideInfo?.reviews?.map((review, index) => <SwiperSlide key={index} >
-                            <div className="container flex flex-col  w-[700px] p-6 mx-auto divide-y rounded-md dark:divide-gray-300 dark:bg-gray-50 dark:text-gray-800 bg-white">
+                            <div className="container flex flex-col  max:w-[700px] p-6 mx-auto divide-y rounded-md dark:divide-gray-300 dark:bg-gray-50 dark:text-gray-800 bg-white">
                                 <div className="flex justify-between p-4">
                                     <div className="flex space-x-4">
                                         <div>
