@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     const [currentSlider, setCurrentSlider] = useState(0);
-    const sliders = [{ img: "https://i.ibb.co/7gHPGry/florian-schmidinger-b-79n-Oqf95-I-unsplash-800x533.jpg", title: "Modern Apartment in Downtown", des: "Beautifully designed modern apartment with stunning city views" }, { img: "https://i.ibb.co/0ckw9fD/blog11-1060x600.jpg", title: "Charming Townhouse in Suburbia", des: "Cozy townhouse nestled in a quiet suburban neighborhood." }, { img: "https://i.ibb.co/Q8fbvfz/post-img4-1536x864.jpg", title: "Spacious Family Home with Pool", des: "Large family home perfect for entertaining, with a backyard pool." }, { img: "https://i.ibb.co/2smBpWt/ralph-ravi-kayden-2d4l-AQAlb-DA-unsplash-800x533.jpg", title: "Luxurious Vacation Rental Villa", des: "Exclusive villa with breathtaking ocean views, perfect for a luxurious vacation." }, { img: "https://i.ibb.co/rdsnS5Q/3d-electric-car-building.jpg", title: "Cozy Studio Apartment in the City Center", des: "Compact studio apartment conveniently located near shops and restaurants." },];
+    const sliders = [{ img: "https://i.ibb.co/7gHPGry/florian-schmidinger-b-79n-Oqf95-I-unsplash-800x533.jpg", title: "Majestic Mountain Retreat", des: "Serene mountain cabin with stunning panoramic views. Picturesque lodge offering activities by the lake" }, { img: "https://i.ibb.co/0ckw9fD/blog11-1060x600.jpg", title: "Historic Downtown Excursion", des: "Explore charming streets filled with history and culture. Picturesque lodge offering activities by the lake." }, { img: "https://i.ibb.co/Q8fbvfz/post-img4-1536x864.jpg", title: "Beachfront Paradise Escape", des: "Relax in a beachfront villa with ocean vistas. Picturesque lodge offering activities by the lake." }, { img: "https://i.ibb.co/2smBpWt/ralph-ravi-kayden-2d4l-AQAlb-DA-unsplash-800x533.jpg", title: "Lush Forest Hideaway", des: "Cozy cabin nestled in a tranquil forest setting. Picturesque lodge offering activities by the lake." }, { img: "https://i.ibb.co/rdsnS5Q/3d-electric-car-building.jpg", title: "Vibrant City Nightlife", des: "Enjoy modern apartments close to nightlife and dining. Picturesque lodge offering activities by the lake." },];
     const prevSlider = () => setCurrentSlider((currentSlider) => currentSlider === 0 ? sliders.length - 1 : currentSlider - 1);
     const nextSlider = () => setCurrentSlider((currentSlider) => currentSlider === sliders.length - 1 ? 0 : currentSlider + 1);
     const isSmallScreen = window.innerWidth <= 768;
@@ -44,7 +45,17 @@ const Banner = () => {
                     </div>
                 </div>
 
-                
+                <div className="hidden md:flex gap-6 absolute bottom-[100px] left-[100px]">
+                        <Link to="/comunity" className="w-[150px] lg:w-[100px] text-center rounded-md text-[17px] font-semibold px-[3px] lg:px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2  border-[#0095ff] text-[#0095ff] hover:text-white">
+                            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#0095ff] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                            <span className="relative text-[#0095ff] transition duration-300 group-hover:text-white ease">Comunity</span>
+                        </Link>
+                        <Link to="/blogs" className="w-[150px] lg:w-[100px] text-center rounded-md text-[17px] font-semibold px-[3px] lg:px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2  border-[#0095ff] text-[#0095ff] hover:text-white">
+                            <span className="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-[#0095ff] top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+                            <span className="relative text-[#0095ff] transition duration-300 group-hover:text-white ease">Blogs</span>
+                        </Link>
+                </div>
+
             </div>
         </div>
     );

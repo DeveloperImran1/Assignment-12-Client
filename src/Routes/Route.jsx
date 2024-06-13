@@ -26,12 +26,14 @@ import TourTypePage from "../Pages/Home/TourTypePage";
 import AllSpots from "../Pages/AllSpots/AllSpots";
 import BlogsDetails from "../Pages/Blogs/BlogsDetails";
 import NormalUserProfile from "../Components/NormalUserProfile";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
   
 const router = createBrowserRouter([
     {
       path: "/",
       element: <Main></Main>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path: '/',

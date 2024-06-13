@@ -56,7 +56,7 @@ const TourGuideRevew = ({ guideInfo }) => {
                                     </div>
                                     <div className="flex items-center space-x-2 dark:text-yellow-700">
                                         <FaStar size={22} className="text-[#fb923c]" ></FaStar>
-                                        <span className="text-xl font-bold">{review?.rating}</span>
+                                        <span className="text-xl font-bold">{review?.rating || 5}</span>
                                     </div>
                                 </div>
                                 <hr />

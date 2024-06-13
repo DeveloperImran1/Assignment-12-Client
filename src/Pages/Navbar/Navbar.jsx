@@ -104,54 +104,62 @@ const Navbar = () => {
 
 
     return (
-        <div className=' w-full bg-white z-10 shadow-sm'>
+        <div className=' w-full leading-none dark:bg-black z-10 shadow-sm'>
             <div className='py-4 px-[2%] border-b-[1px]'>
 
                 <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
                     {/* Logo */}
-                    <Link to='/'>
+                    <Link to='/' className='flex justify-center items-center ' >
                         <img
                             // className='hidden md:block'
-                            src='https://i.ibb.co/4ZXzmq5/logo.png'
+                            src='https://i.ibb.co/xD2TrVn/z3376104only-T-removebg-preview.png'
                             alt='logo'
-                            width='100'
-                            height='100'
+                            width='80'
+                            height='80'
                         />
+                        <h2 className='text-[18px] font-bold hidden lg:flex leading-none dark:text-white' >Tourist<span className='text-[#076aa5]' >Book</span></h2>
+
+
                     </Link>
                     {/* Dropdown Menu */}
                     <div className='relative'>
-                        <div className='flex relative flex-row z-50 items-center gap-3'>
-                            <Link
-                                to='/'
-                                className='hidden md:flex px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                to='/comunity'
-                                className='hidden md:flex px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                            >
-                                Community
-                            </Link>
-                            <Link
-                                to='/blogs'
-                                className='hidden md:flex px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                            >
-                                Blogs
-                            </Link>
-                            <Link
-                                to='/aboutUs'
-                                className='hidden md:flex px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                            >
-                                About Us
-                            </Link>
-                            <Link
-                                to='/contactUs'
-                                className='hidden md:flex px-4 py-3 hover:bg-neutral-100 transition font-semibold'
-                            >
-                                Contact Us
-                            </Link>
+                        <div className='flex relative flex-row z-50 items-center gap-8'>
+                      
 
+                            <NavLink to='/' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-gray-600'}>
+                                <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
+                                    Home
+                                    <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+                                </li>
+                            </NavLink>
+                            <NavLink to='/comunity' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-white'}>
+                                <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
+                                    Comunity
+                                    <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+                                </li>
+                            </NavLink>
+                            <NavLink to='/blogs' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-white'}>
+                                <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
+                                    Blogs
+                                    <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+                                </li>
+                            </NavLink>
+                            <NavLink to='/aboutUs' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-white'}>
+                                <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
+                                    About Us
+                                    <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+                                </li>
+                            </NavLink>
+                            <NavLink to='/contactUs' className={({ isActive }) => isActive ? 'text-[#076aa5]' : 'leading-none dark:text-white'}>
+                                <li className="group hidden md:flex  cursor-pointer font-semibold md:flex-col">
+                                    Contact Us
+                                    <span className="mt-[2px] h-[3px] w-[0px]   rounded-full bg-sky-500 transition-all duration-300 group-hover:w-full"></span>
+                                </li>
+                            </NavLink>
+                          
+                           
+                           
+                          
 
                             {/* For notification edit now  */}
 
@@ -165,7 +173,7 @@ const Navbar = () => {
                             </button>
 
                             {/*  Dropdown menu */}
-                            <div id="dropdownNotification" className={` ${isNotification ? 'inline' : 'hidden'} overflow-y-auto z-20  h-[400px]  absolute top-[60px] left-[160px] w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`} aria-labelledby="dropdownNotificationButton">
+                            <div id="dropdownNotification" className={` ${isNotification ? 'inline' : 'hidden'} overflow-y-auto z-20  h-[400px]  absolute top-[60px] md:left-[160px] w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`} aria-labelledby="dropdownNotificationButton">
                                 <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
                                     Notifications
                                 </div>
@@ -250,19 +258,19 @@ const Navbar = () => {
                                             {
                                                 userRole ? <>
                                                     {
-                                                         userRole === "Admin" && <Link to="/dashboard/admin-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
-                                                                Dashboard
-                                                            </Link>
+                                                        userRole === "Admin" && <Link to="/dashboard/admin-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
+                                                            Dashboard
+                                                        </Link>
                                                     }
                                                     {
                                                         userRole === "tourGuide" && <Link to="/dashboard/tourGuide-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
-                                                                Dashboard
-                                                            </Link>
+                                                            Dashboard
+                                                        </Link>
                                                     }
                                                     {
-                                                     userRole === "Tourist" && <Link to="/dashboard/tourist-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
-                                                                Dashboard
-                                                            </Link>
+                                                        userRole === "Tourist" && <Link to="/dashboard/tourist-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
+                                                            Dashboard
+                                                        </Link>
                                                     }
                                                 </>
                                                     : <span className="loading mx-auto loading-infinity loading-lg"></span>

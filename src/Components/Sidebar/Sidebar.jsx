@@ -19,6 +19,7 @@ import { GrUserAdmin } from "react-icons/gr";
 import useMyTotalBooking from '../../hooks/useMyTotalBooking'
 import useMyTotalWishList from '../../hooks/useMyTotalWishList'
 import AdminRequestModal from '../Modal/AdminRequestModal'
+import MesengerChat from '../../Pages/Home/MesengerChat'
 
 
 const Sidebar = () => {
@@ -157,6 +158,8 @@ const Sidebar = () => {
 
             <span className='mx-4 font-medium'>Logout</span>
           </button>
+
+          <MesengerChat></MesengerChat>
         </div>
       </div>
     </>

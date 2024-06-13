@@ -54,7 +54,7 @@ const [confettiValue, setConfettiValue] = useState(false)
 
     // save user data in db
     const handleSaveUser = async (user) => {
-        if (user?.displayName || user?.email, user?.photoURL) {
+        if (user?.displayName && user?.email  && user?.photoURL) {
             const userInfo = {
                 userName: user?.displayName,
                 userEmail: user?.email,
@@ -65,6 +65,7 @@ const [confettiValue, setConfettiValue] = useState(false)
             }
             console.log("Db te user add hotr jaia", userInfo)
             const data = await axiosPublic.post('/users', userInfo);
+            console.log(data.data)
         }
 
     }

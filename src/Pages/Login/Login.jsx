@@ -7,9 +7,10 @@ import { FaEye } from "react-icons/fa6";
 import Swal from 'sweetalert2'
 import 'animate.css';
 import useAuth from "../../hooks/useAuth";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 const Login = () => {
-    const { login, signInGoogle, signInGithub, user, loading } = useAuth();
+    const { login, signInGoogle, signInGithub, user, loading, confetti } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,13 +22,23 @@ const Login = () => {
             title: "Welcome!",
             text: "You Successfully Login !",
             icon: "success"
-        });
+        })
+        
 
         if (location?.state) {
             navigate(location.state)
         } else {
             navigate("/")
         }
+
+           // stiker porbe
+           setTimeout(() => {
+            confetti(true)
+
+            setTimeout(() => {
+                confetti(false)
+            }, 15000);
+        }, 3000);
 
 
     };
@@ -188,6 +199,15 @@ const Login = () => {
                 <img className="w-[400px] h-[60%] " src="https://i.ibb.co/m50872x/features-2.png" alt="" />
             </div>
 
+            <MessengerCustomerChat
+                // pageId="104635808891000"
+                // appId="979168570366441"
+
+                // gias vaier aita
+                pageId="109036884171314"
+                appId="745410220448330"
+            />
+      
         </div>
     );
 };
