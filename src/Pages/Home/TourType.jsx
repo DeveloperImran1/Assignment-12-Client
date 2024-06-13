@@ -12,8 +12,9 @@ const TourType = () => {
             <div className="bg-fixed my-[96px] bg-no-repeat bg-cover text-white" style={{ backgroundImage: "url('https://i.ibb.co/4T8Vfsj/full-shot-woman-taking-selfie-23-2149153257.jpg') " }} >
                 <div className="h-[300px] w-[70%] flex flex-col justify-center space-y-2  text-left z-10 text-white bg-gradient-to-r from-black via-gray-900 to-transparent" >
 
-                    <div className=" px-4 xs:px-10 xl:px-0 py-14 sm:py-20 ml-[40px] max-w-7xl mx-auto"><h3 className="text-2xl sm:text-3xl font-semibold max-w-96 sm:leading-10">Subscribe our news letter for get our exiting offer!</h3>
-                        <div className="h-[300px] w-16 mx-auto relative -rotate-90 ">
+                    <div className=" px-4 xs:px-10 xl:px-0  ml-[40px] max-w-7xl mx-auto">
+                        <h3 className="text-2xl pt-14  sm:text-3xl font-semibold max-w-96 sm:leading-10">Find Now Package with Tour Category!</h3>
+                        <div className="h-[300px] w-16 -mt-14 mx-auto relative -rotate-90 ">
                             <div className="group flex flex-col items-center justify-center w-max mx-auto absolute top-0 left-[50%] -translate-x-1/2">
                                 {/* + icon  */}
                                 <div className="flex justify-center w-16 h-16 bg-[#0095FF] rounded-full items-center group-hover:rotate-[135deg] hover:bg-[#0095FF]/80 duration-500">

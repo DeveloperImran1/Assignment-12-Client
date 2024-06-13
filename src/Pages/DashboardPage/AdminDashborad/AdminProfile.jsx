@@ -8,6 +8,7 @@ import useTotalTourGuideLen from "../../../hooks/useTotalTorGuideLen";
 import useTotalTourPackage from "../../../hooks/useTotalTourPackageLen";
 import { Link } from "react-router-dom";
 import SeactionTitle from "../../../Components/SeactionTitle";
+import { Helmet } from "react-helmet";
 
 const AdminProfile = () => {
     const { user } = useAuth();
@@ -21,13 +22,16 @@ const AdminProfile = () => {
 
     })
     console.log(adminData)
-    const {totalTourist} = useTotalTouristLen()
-    const {totalTourGuide} = useTotalTourGuideLen()
-    const {totalTourPackage} = useTotalTourPackage()
+    const { totalTourist } = useTotalTouristLen()
+    const { totalTourGuide } = useTotalTourGuideLen()
+    const { totalTourPackage } = useTotalTourPackage()
 
     return (
         <div>
-            <SeactionTitle name="Admin Profile"  title="My Information As a Admin" ></SeactionTitle>
+            <Helmet>
+                <title>TouristBook || AdminProfile</title>
+            </Helmet>
+            <SeactionTitle name="Admin Profile" title="My Information As a Admin" ></SeactionTitle>
             <div className=" mx-auto my-20 flex flex-col items-center justify-center md:flex-row">
 
                 <div className="group relative hidden md:block sm:w-[350px]">

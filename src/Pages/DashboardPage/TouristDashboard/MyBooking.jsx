@@ -12,6 +12,7 @@ import PaymentModal from "../../../Components/Modal/PaymentModal";
 import Modal1 from "../../../Components/Modal/PaymentModal";
 import ShowPaymentInfo from "../../../Components/Modal/ShowPaymentInfo";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { Helmet } from "react-helmet";
 
 
 
@@ -76,7 +77,9 @@ const MyBooking = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>TouristBook || MyBooking</title>
+            </Helmet>
             <div className="overflow-x-auto border w-full mx-auto bg-[#1313180D] rounded-xl border-black  ">
                 <table className="min-w-full text-[16px] font-semibold ">
                     <thead className="dark:bg-gray-300 bg-slate-600 mt-10">

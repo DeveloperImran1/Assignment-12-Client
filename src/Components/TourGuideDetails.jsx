@@ -12,6 +12,7 @@ import { MdWork } from "react-icons/md";
 import TourGuideRevew from "./TourGuideRevew";
 import SendReview from "./SendReview";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const TourGuideDetails = () => {
     const axiosPublic = useAxiosPublic();
@@ -31,14 +32,17 @@ const TourGuideDetails = () => {
 
     const modalHandler = () => {
         setIsOpen(true)
-    
-      }
-      const closeModal = ()=> {
+
+    }
+    const closeModal = () => {
         setIsOpen(false)
-      }
+    }
 
     return (
-        <div>  
+        <div>
+            <Helmet>
+                <title>TouristBook || TourGuideProfile</title>
+            </Helmet>
             <SendReview refetch={refetch} closeModal={closeModal} modalHandler={modalHandler} isOpen={isOpen} userEmail={userEmail} guideInfo={guideInfo} ></SendReview>
             <div className="mx-auto my-20 max-w-[550px] space-y-8 rounded-2xl bg-white px-6 py-8 shadow-md dark:bg-[#18181B] md:max-w-[550px]">
                 {/* profile image & bg  */}
@@ -101,7 +105,7 @@ const TourGuideDetails = () => {
                         <h5 className="text-[17px] font-medium">{education}</h5>
                         <p className="text-sm text-gray-400">Education</p>
                     </div>
-                    
+
                 </div>
                 <div className="flex justify-center">
                     <button onClick={modalHandler} className="t w-[80%] rounded-full py-2 font-medium text-gray-400 shadow-[0px_0px_10px_#E2DADA] duration-500  hover:scale-95 hover:bg-[#0095FF] hover:text-white hover:shadow-xl dark:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.8)]">Review Now</button>
@@ -109,7 +113,7 @@ const TourGuideDetails = () => {
             </div>
 
             <TourGuideRevew guideInfo={guideInfo} ></TourGuideRevew>
-            
+
 
         </div>
     );

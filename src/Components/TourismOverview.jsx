@@ -30,7 +30,7 @@ const TourismOverview = () => {
 
             <section className="w-full h-[270px] rounded-t-3xl mt-[120px] bg-[#076aa5] relative flex justify-evenly" >
                 <div className="absolute flex gap-11 bottom-[40%]" >
-                    <div className="max-w-xs flex flex-col justify-center items-center rounded-t-xl rounded-b-sm shadow-md bg-white dark:bg-gray-50 dark:text-gray-800">
+                    <div className="max-w-xs hidden md:flex flex-col justify-center items-center rounded-t-xl rounded-b-sm shadow-md bg-white dark:bg-gray-50 dark:text-gray-800">
                         <FaRoute className="text-[70px] text-[#076aa5] mt-7" ></FaRoute>
                         <div className="flex flex-col items-center justify-center p-6 space-y-8">
                             <div className="space-y-2">
@@ -48,7 +48,7 @@ const TourismOverview = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="max-w-xs flex flex-col justify-center items-center rounded-t-xl rounded-b-sm shadow-md bg-white dark:bg-gray-50 dark:text-gray-800">
+                    <div className="max-w-xs hidden lg:flex flex-col justify-center items-center rounded-t-xl rounded-b-sm shadow-md bg-white dark:bg-gray-50 dark:text-gray-800">
                         <BiSolidOffer className="text-[70px] text-[#076aa5] mt-7" ></BiSolidOffer>
                         <div className="flex flex-col items-center justify-center p-6 space-y-8">
                             <div className="space-y-2">

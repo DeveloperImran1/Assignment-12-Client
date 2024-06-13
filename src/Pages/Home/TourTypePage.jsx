@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import SeactionTitle from "../../Components/SeactionTitle";
 import OurPackagesCard from "../../Components/OurPackages/OurPackagesCard";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const TourTypePage = () => {
     const axiosPublic = useAxiosPublic();
@@ -25,14 +26,17 @@ const TourTypePage = () => {
 
     return (
         <div>
-                 <div className="" >
-            <SeactionTitle name={`${category}`} title={`${category} All Packages`}  ></SeactionTitle>
-          <div className="grid grid-cols-3 gap-11" >
-                {
-                    categorySpots.map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard> )
-                }
+            <Helmet>
+                <title>TouristBook || TourTypr</title>
+            </Helmet>
+            <div className="" >
+                <SeactionTitle name={`${category}`} title={`${category} All Packages`}  ></SeactionTitle>
+                <div className="grid grid-cols-3 gap-11" >
+                    {
+                        categorySpots.map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard>)
+                    }
+                </div>
             </div>
-          </div>
         </div>
     );
 };

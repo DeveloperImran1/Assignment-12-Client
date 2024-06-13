@@ -24,6 +24,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaReply } from "react-icons/fa6";
 
+import { Helmet } from "react-helmet";
 
 const labels = {
     0.5: 'Useless',
@@ -109,7 +110,9 @@ const BlogsDetails = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>TouristBook || BlogDetails</title>
+            </Helmet>
             <div className="container flex flex-col w-full max-w-[70%] p-6 mx-auto  rounded-md dark:divide-gray-300 dark:bg-gray-50 dark:text-gray-800">
                 <h2 className="text-4xl font-bold mb-5" >{blog?.title}</h2>
 

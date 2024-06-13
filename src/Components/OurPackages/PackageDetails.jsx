@@ -21,6 +21,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import OurPackagesCard from "./OurPackagesCard";
 import SeactionTitle from "../SeactionTitle";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 
 const PackageDetails = () => {
@@ -158,6 +159,9 @@ const PackageDetails = () => {
     }
     return (
         <div className="w-full lg:w-[85%] mx-auto p-5 border-2 rounded-2xl" >
+            <Helmet>
+                <title>TouristBook || PackageDetails</title>
+            </Helmet>
             <PackageDetailsInfo packageInfo={spotDetails} ></PackageDetailsInfo>
             <div className="flex justify-between w-full mt-[60px]" >
                 <div className="flex flex-col gap-5  ">

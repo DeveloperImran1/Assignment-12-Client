@@ -3,29 +3,32 @@ import { Link, NavLink } from "react-router-dom";
 const Footer = () => {
     return (
         <>
-            <footer className="footer p-10 flex  justify-evenly items-center bg-base-200 text-base-content">
+            <div className="footer p-10 flex flex-col lg:flex-row justify-evenly items-center bg-base-200 text-base-content">
 
-                <nav>
-                    <h6 className="footer-title">Services</h6>
-                    <a className="link link-hover">Traveling</a>
-                    <a className="link link-hover">Planing</a>
-                    <a className="link link-hover">Guided</a>
-                    <a className="link link-hover">Support</a>
-                </nav>
-                <nav>
-                    <h6 className="footer-title">Company</h6>
-                    <Link to="/contactUs" className="link link-hover">Contact us</Link>
-                    <Link to="/aboutUs" className="link link-hover">About us</Link>
-                    <Link to="/blogs" className="link link-hover">Blogs</Link>
-                    <Link to="/comunity" className="link link-hover">Comunity</Link>
-                </nav>
-                <nav>
-                    <h6 className="footer-title">Legal</h6>
-                    <a className="link link-hover">Terms of use</a>
-                    <a className="link link-hover">Privacy policy</a>
-                    <a className="link link-hover">Cookie policy</a>
-                </nav>
-                <nav>
+                <div className="flex justify-between items-start gap-12 lg:gap-[170px]" >
+                    <nav className="flex flex-col gap-2">
+                        <h6 className="footer-title">Services</h6>
+                        <a className="link link-hover">Traveling</a>
+                        <a className="link link-hover">Planing</a>
+                        <a className="link link-hover">Guided</a>
+                        <a className="link link-hover">Support</a>
+                    </nav>
+                    <nav className="flex flex-col gap-2" >
+                        <h6 className="footer-title">Company</h6>
+                        <Link to="/contactUs" className="link link-hover">Contact us</Link>
+                        <Link to="/aboutUs" className="link link-hover">About us</Link>
+                        <Link to="/blogs" className="link link-hover">Blogs</Link>
+                        <Link to="/comunity" className="link link-hover">Comunity</Link>
+                    </nav>
+
+                    <nav className="flex flex-col gap-2">
+                        <h6 className="footer-title">Legal</h6>
+                        <a className="link link-hover">Terms of use</a>
+                        <a className="link link-hover">Privacy policy</a>
+                        <a className="link link-hover">Cookie policy</a>
+                    </nav>
+                </div>
+                <nav className="flex flex-col gap-2">
                     <h6 className="footer-title">Newsletter</h6>
                     <div className=" w-80">
                         <label className="label">
@@ -43,7 +46,7 @@ const Footer = () => {
                     </div>
                 </nav>
 
-            </footer>
+            </div>
             <aside className="bg-base-200 pb-11" >
                 <NavLink to="/"  >
                     <div className=" cursor-pointer rounded-2xl px-3 py-2 text-xl flex justify-center items-center font-semibold leading-none dark:text-white ">

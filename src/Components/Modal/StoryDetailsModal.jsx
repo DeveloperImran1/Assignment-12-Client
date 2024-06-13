@@ -62,10 +62,10 @@ const StoryDetailsModal = ({ closeModal, isOpen, modalHandler, story }) => {
                             leaveFrom='opacity-100 scale-100'
                             leaveTo='opacity-0 scale-95'
                         >
-                            <DialogPanel className='w-full max-w-[60%] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                            <DialogPanel className='w-full lg:max-w-[60%] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
 
-                                <div className='flex justify-between gap-6' >
-                                    <img src={spotPhoto} className='w-[50%] h-[350px] rounded-2xl' alt="" />
+                                <div className='flex flex-col lg:flex-row justify-between gap-6' >
+                                    <img src={spotPhoto} className='w-full lg:w-[50%] h-[150px] lg:h-[350px] rounded-2xl' alt="" />
                                     <div>
                                         <p className='text-3xl font-bold ' >Title: <span className='text-[26px] font-semibold text-gray-600' >{spotTitle}</span> </p>
                                         <p className='text-xl font-bold text-black mt-7 ' >Description: <span className='text-base font-semibold text-gray-600' >{spotDescription}</span></p>

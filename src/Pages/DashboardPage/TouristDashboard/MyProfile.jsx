@@ -20,6 +20,7 @@ import StoryCard from "../../Home/StorieSection/StoryCard";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import ProfileInfoModal from "../../../Components/Modal/ProfileInfoModal";
+import { Helmet } from "react-helmet";
 
 const MyProfile = () => {
     const { user } = useAuth();
@@ -80,7 +81,9 @@ const MyProfile = () => {
     }
     return (
         <>
-
+            <Helmet>
+                <title>TouristBook || Profile</title>
+            </Helmet>
             <div className="border-[6px] border-[#c8c4b9] rounded-[21px]" >
                 <AddPostModal isOpen={addPostIsOpen} closeModal={addPostCloseModal} modalHandler={addPostModalHandler} refetch={refetch}></AddPostModal>
                 <AddStory isOpen={addStoryIsOpen} closeModal={addStoryCloseModal} modalHandler={addStoryModalHandler}></AddStory>

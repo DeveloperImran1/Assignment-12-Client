@@ -4,6 +4,7 @@ import StorySlider from "./StorySlider";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import StoryCard from "../Home/StorieSection/StoryCard";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const Comunity = () => {
     const axiosPublic = useAxiosPublic();
@@ -32,6 +33,10 @@ const Comunity = () => {
 
     return (
         <div>
+
+            <Helmet>
+                <title>TouristBook || Comunity</title>
+            </Helmet>
             <div>
                 <PostNow refetch={refetch} handleSearch={handleSearch}></PostNow>
                 <div className="my-8" >

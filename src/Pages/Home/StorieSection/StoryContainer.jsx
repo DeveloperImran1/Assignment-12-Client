@@ -18,7 +18,7 @@ const StoryContainer = () => {
     <SeactionTitle name="Posts" title="Explore now Tourist Experience" ></SeactionTitle>
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" >
             {
-                storys?.slice().reverse().map(story => <StoryCard key={story?._id} story={story} refetch={refetch} ></StoryCard>)
+                storys?.slice(0, 6).reverse().map(story => <StoryCard key={story?._id} story={story} refetch={refetch} ></StoryCard>)
             }
 
             

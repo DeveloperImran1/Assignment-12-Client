@@ -43,19 +43,22 @@ const Countdown = () => {
             <div className="flex justify-evenly items-center h-[300px] w-full" >
 
                 <div className="App space-x-6">
-                    <CountdownCircleTimer
-                        {...timerProps}
-                        colors="#7E2E84"
-                        duration={daysDuration}
-                        initialRemainingTime={remainingTime}
-                    >
-                        {({ elapsedTime, color }) => (
-                            <span style={{ color }}>
-                                {renderTime("days", getTimeDays(daysDuration - elapsedTime))}
-                            </span>
-                        )}
-                    </CountdownCircleTimer>
-                    <CountdownCircleTimer
+                    <div  className="hidden md:flex">
+                        <CountdownCircleTimer
+                            {...timerProps}
+                            colors="#7E2E84"
+                            duration={daysDuration}
+                            initialRemainingTime={remainingTime}
+                        >
+                            {({ elapsedTime, color }) => (
+                                <span style={{ color }}                            >
+                                    {renderTime("days", getTimeDays(daysDuration - elapsedTime))}
+                                </span>
+                            )}
+                        </CountdownCircleTimer>
+                    </div>
+                  <div  className="hidden md:flex">
+                  <CountdownCircleTimer
                         {...timerProps}
                         colors="#D14081"
                         duration={daySeconds}
@@ -70,7 +73,9 @@ const Countdown = () => {
                             </span>
                         )}
                     </CountdownCircleTimer>
-                    <CountdownCircleTimer
+                  </div>
+                 <div className="hidden md:flex" >
+                 <CountdownCircleTimer
                         {...timerProps}
                         colors="#EF798A"
                         duration={hourSeconds}
@@ -85,7 +90,9 @@ const Countdown = () => {
                             </span>
                         )}
                     </CountdownCircleTimer>
-                    <CountdownCircleTimer
+                 </div>
+              <div>
+              <CountdownCircleTimer
                         {...timerProps}
                         colors="#218380"
                         duration={minuteSeconds}
@@ -100,6 +107,7 @@ const Countdown = () => {
                             </span>
                         )}
                     </CountdownCircleTimer>
+              </div>
                 </div>
 
                 <img className="w-[300px] h-[300px]" src="https://i.ibb.co/BTX0Gwv/special-offer-ribbon-red-scroll-banner-sale-tag-market-special-offer-discount-167801-1731-removebg-p.png" alt="" />

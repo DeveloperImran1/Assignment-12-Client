@@ -4,6 +4,7 @@ import useRoleCollect from "../hooks/useRoleCollect";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const NormalUserProfile = () => {
     const axiosPublic = useAxiosPublic();
@@ -15,13 +16,13 @@ const NormalUserProfile = () => {
             return res.data;
         }
     })
-console.log(user)
+    console.log(user)
     if (isLoading) {
         return <div className="w-10 h-10 animate-[spin_2s_linear_infinite] rounded-full border-4 border-dashed border-sky-600"></div>
 
     }
 
-    const { userName , userPhoto, userEmail, userRole  } = user;
+    const { userName, userPhoto, userEmail, userRole } = user;
 
     console.log(user)
 
@@ -35,7 +36,9 @@ console.log(user)
     ]
     return (
         <div id="profile" className="flex justify-center  items-center relative ">
-
+            <Helmet>
+                <title>TouristBook || Profile</title>
+            </Helmet>
             <div className="max-w-[400px] md:w-[450px] p-4 md:p-6  rounded-2xl space-y-5  bg-base-200    shadow-lg group transition border-2  hover:scale-105 border-primary hover:border-secondary border-opacity-30 hover:no-underline focus:no-underline">
                 {/* profile image & bg  */}
                 <div className="relative">
@@ -61,7 +64,7 @@ console.log(user)
                     <div className="flex w-full justify-between gap-4 py-2">
                         {svgs?.map((svg, idx) => (<div key={idx} className="rounded-full shadow-[0px_2px_8px_0px_rgba(99,99,99,0.4)]  duration-300 hover:scale-150">{svg?.svg}</div>))}
                     </div>
-                    <div onClick={()=> toast.success('Send Your Request.')} className="w-full pointer flex items-center justify-center">
+                    <div onClick={() => toast.success('Send Your Request.')} className="w-full pointer flex items-center justify-center">
                         <button className="hover:bg-[#0095FF] hover:scale-95 font-medium hover:text-white w-[80%] mx-auto py-2 mt-7 rounded-full hover:shadow-xl   text-gray-400 shadow-[0px_0px_10px_#E2DADA] t duration-500">
                             Add Friend
                         </button>

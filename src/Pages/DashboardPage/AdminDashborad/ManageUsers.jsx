@@ -8,6 +8,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import { FaUserPlus } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import SeactionTitle from "../../../Components/SeactionTitle";
+import { Helmet } from "react-helmet";
 
 const ManageUsers = () => {
     const [on, setValue] = useState('off')
@@ -44,6 +45,9 @@ const ManageUsers = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>TouristBook || ManageUsers</title>
+            </Helmet>
             <SeactionTitle name="All Users" title="Manage Users Role" ></SeactionTitle>
             <div className="flex flex-col md:flex-row justify-center items-center gap-[70px] my-14 " >
                 <div className="border-2 rounded-md" >

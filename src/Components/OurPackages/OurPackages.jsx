@@ -19,9 +19,9 @@ const OurPackages = () => {
     console.log(spots)
     
     return (
-        <div className="grid gap-8 grid-cols-3" >
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3" >
             {
-                spots.map(spot => <OurPackagesCard key={spot._id} spot={spot} loading={loading} ></OurPackagesCard>)
+                spots?.slice(0, 6)?.map(spot => <OurPackagesCard key={spot._id} spot={spot} loading={loading} ></OurPackagesCard>)
             }
         </div>
     );

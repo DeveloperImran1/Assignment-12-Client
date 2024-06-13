@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SeactionTitle from "../../Components/SeactionTitle";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
     const [search, setSearch] = useState("");
@@ -34,16 +35,19 @@ const Blogs = () => {
     console.log(blogFirst)
     return (
         <div>
+            <Helmet>
+                <title>TouristBook || Blogs</title>
+            </Helmet>
             <div className="flex  items-center justify-between" >
                 <div className="flex flex-col justify-start items-start gap-4 my-7" >
                     <p className="text-[18px] text-center sriracha px-2 rounded-md text-white  -rotate-6 bg-[#076aa5] " >Bloogs</p>
                     <h2 className="text-3xl font-bold " >Explore Our All Blogs</h2>
                 </div>
                 <div>
-                <label className="input input-bordered flex items-center gap-2 w-full">
-                            <input type="text" onChange={e => setSearch(e.target.value)} className="grow" placeholder="Search" />
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-                        </label>
+                    <label className="input input-bordered flex items-center gap-2 w-full">
+                        <input type="text" onChange={e => setSearch(e.target.value)} className="grow" placeholder="Search" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+                    </label>
 
                 </div>
             </div>
@@ -89,9 +93,9 @@ const Blogs = () => {
 
                                         <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
                                             {
-                                                 blogFirst?.date && <button className="rounded-xl bg-[#0095FF] px-3 py-1 font-medium text-white duration-200 hover:bg-[#0095FF]/90">
-                                                 {formatDistanceToNow(new Date(blogFirst?.date))} ago
-                                             </button>
+                                                blogFirst?.date && <button className="rounded-xl bg-[#0095FF] px-3 py-1 font-medium text-white duration-200 hover:bg-[#0095FF]/90">
+                                                    {formatDistanceToNow(new Date(blogFirst?.date))} ago
+                                                </button>
                                             }
                                         </div>
                                         <img width={300} height={370} className="h-[370px] w-full rounded-lg bg-black/40" src={blogFirst?.image?.[1] || 'https://source.unsplash.com/300x300/?macbook'} alt="card navigate ui" />
@@ -108,9 +112,9 @@ const Blogs = () => {
 
                                         <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
                                             {
-                                                     blogFirst?.date && <button className="rounded-xl bg-[#0095FF] px-3 py-1 font-medium text-white duration-200 hover:bg-[#0095FF]/90">
-                                                     {formatDistanceToNow(new Date(blogFirst?.date))} ago
-                                                 </button>
+                                                blogFirst?.date && <button className="rounded-xl bg-[#0095FF] px-3 py-1 font-medium text-white duration-200 hover:bg-[#0095FF]/90">
+                                                    {formatDistanceToNow(new Date(blogFirst?.date))} ago
+                                                </button>
                                             }
 
                                         </div>

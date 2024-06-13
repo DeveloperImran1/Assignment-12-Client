@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import 'animate.css';
 import useAuth from "../../hooks/useAuth";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import { Helmet } from "react-helmet";
 
 const Login = () => {
     const { login, signInGoogle, signInGithub, user, loading, confetti } = useAuth();
@@ -23,7 +24,7 @@ const Login = () => {
             text: "You Successfully Login !",
             icon: "success"
         })
-        
+
 
         if (location?.state) {
             navigate(location.state)
@@ -31,8 +32,8 @@ const Login = () => {
             navigate("/")
         }
 
-           // stiker porbe
-           setTimeout(() => {
+        // stiker porbe
+        setTimeout(() => {
             confetti(true)
 
             setTimeout(() => {
@@ -106,7 +107,10 @@ const Login = () => {
     return (
         <div>
 
-        
+            <Helmet>
+                <title>TouristBook || Login</title>
+            </Helmet>
+
             <div className="flex justify-center mx-auto">
                 <img className="w-auto h-7 sm:h-8" src="https://i.ibb.co/tC4g9Ws/home-logo-and-symbols-vector-removebg-preview.png" />
             </div>
@@ -207,7 +211,7 @@ const Login = () => {
                 pageId="109036884171314"
                 appId="745410220448330"
             />
-      
+
         </div>
     );
 };

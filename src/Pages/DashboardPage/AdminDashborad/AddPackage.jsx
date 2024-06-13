@@ -3,6 +3,8 @@ import { imageUpload } from "../../../api/utils";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast, { Toaster } from 'react-hot-toast';
 import SeactionTitle from "../../../Components/SeactionTitle";
+import { Helmet } from "react-helmet";
+
 const AddPackage = () => {
 
     // dropdown button er jonno
@@ -64,7 +66,7 @@ const AddPackage = () => {
             }
         }
 
-        if(!image || !tripName || !price || !location || !tripTime || !tripTitle || !seasonality || !tourType || !totalVisitorPerYear || !aboutOfSpots || !tourPlan){
+        if (!image || !tripName || !price || !location || !tripTime || !tripTitle || !seasonality || !tourType || !totalVisitorPerYear || !aboutOfSpots || !tourPlan) {
             return toast.error("Empty Field Is Not Allowed!")
 
         }
@@ -74,20 +76,20 @@ const AddPackage = () => {
             const data = await imageUpload(image)
             setPhoto(data)
 
-  
+
 
             if (photo) {
                 const packageInfo = { spotPhoto, tripName, price, location, tripTime, tripTitle, seasonality, tourType, totalVisitorPerYear, aboutOfSpots, tourPlan }
                 console.log(packageInfo)
 
                 axiosSecure.post('/spots', packageInfo)
-                .then(res => {
-                    console.log(res.data)
-                    if(res.data.acknowledged){
-                        toast.success("Successfully Add Your Package")
-                        form.reset()
-                    }
-                })
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.acknowledged) {
+                            toast.success("Successfully Add Your Package")
+                            form.reset()
+                        }
+                    })
 
             }
         }
@@ -105,8 +107,11 @@ const AddPackage = () => {
 
 
     return (
-        <div className="flex justify-center flex-col items-center" > 
-        <SeactionTitle name="Add Package" title="If You Need Add New Package" ></SeactionTitle>
+        <div className="flex justify-center flex-col items-center" >
+            <Helmet>
+                <title>TouristBook || AddPackage</title>
+            </Helmet>
+            <SeactionTitle name="Add Package" title="If You Need Add New Package" ></SeactionTitle>
             <form onSubmit={handleSubmit} className="flex  flex-col lg:px-6 lg:py-8 w-full lg:w-[65%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
                 <div>
                     {
@@ -137,7 +142,7 @@ const AddPackage = () => {
                     </label>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between items-center" >
-                
+
 
                     <label className="w-full px-6 lg:px-0 lg:w-[45%]">
                         <span className="mb-1">Package Title</span>
@@ -152,19 +157,19 @@ const AddPackage = () => {
                 </div>
 
                 <div className="flex flex-col md:flex-row  justify-between items-center" >
-             
+
 
                     <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
-                    <span className="mb-1">Package Type</span>
-                    <select name="tourType" className="  w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
-                        <option disabled selected>Pick a Tour Type</option>
-                        <option>Historical Walk</option>
-                        <option>Spots</option>
-                        <option>Wildlife</option>
-                        <option>Hiking</option>
-                        <option>Air Rides</option>
-                    </select>
-                </label>
+                        <span className="mb-1">Package Type</span>
+                        <select name="tourType" className="  w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
+                            <option disabled selected>Pick a Tour Type</option>
+                            <option>Historical Walk</option>
+                            <option>Spots</option>
+                            <option>Wildlife</option>
+                            <option>Hiking</option>
+                            <option>Air Rides</option>
+                        </select>
+                    </label>
                     <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Package Type</span>
                         <select name="sessionality" className="  w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 ">
@@ -177,10 +182,10 @@ const AddPackage = () => {
 
                 </div>
 
-           
+
 
                 <div className="flex flex-col md:flex-row  justify-between" >
-                <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
+                    <label className="w-full px-6 lg:px-0 lg:w-[45%]" >
                         <span className="mb-1">Price</span>
                         <input type="number" name="price" placeholder="Your name" className=" w-full   rounded-tr-lg rounded-bl-lg hover:rounded-md shadow-sm focus:ring focus:ring-opacity-75 border-2 border-[#5A5A5D] p-2 focus:dark:ring-violet-600 dark:bg-gray-100 " />
                     </label>

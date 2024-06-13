@@ -25,19 +25,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Toaster } from 'react-hot-toast';
 import Confetti from '../src/hooks/Confetti'
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <NextUIProvider>
-          <RouterProvider router={router} />
-          <ToastContainer />
-          <Toaster />
-        </NextUIProvider>
-        <Confetti></Confetti>
 
-      </AuthProvider>
+      <HelmetProvider>
+        <AuthProvider>
+          <NextUIProvider>
+            <RouterProvider router={router} />
+            <ToastContainer />
+            <Toaster />
+          </NextUIProvider>
+          <Confetti></Confetti>
+
+        </AuthProvider>
+      </HelmetProvider>
+
     </QueryClientProvider>
 
   </React.StrictMode>,

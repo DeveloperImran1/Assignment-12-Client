@@ -21,7 +21,6 @@ import ManageUsers from "../Pages/DashboardPage/AdminDashborad/ManageUsers";
 import MyAssignedTours from "../Pages/DashboardPage/TourGuideDashboard/MyAssignedTours";
 import MyBooking from "../Pages/DashboardPage/TouristDashboard/MyBooking";
 import MyWishlist from "../Pages/DashboardPage/TouristDashboard/MyWishlist";
-import AddStory from "../Pages/DashboardPage/TouristDashboard/AddStory";
 import TourTypePage from "../Pages/Home/TourTypePage";
 import AllSpots from "../Pages/AllSpots/AllSpots";
 import BlogsDetails from "../Pages/Blogs/BlogsDetails";
@@ -131,10 +130,7 @@ const router = createBrowserRouter([
                 path: '/dashboard/tourist-myWishlist',
                 element: <MyWishlist></MyWishlist>
             },
-            {
-                path: '/dashboard/tourist-addStory',
-                element: <AddStory></AddStory>
-            },
+        
 
         ]
     }

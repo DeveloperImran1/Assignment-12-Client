@@ -14,6 +14,7 @@ import { MdDoneOutline } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import toast from 'react-hot-toast';
+import { Helmet } from "react-helmet";
 
 
 const MyAssignedTours = () => {
@@ -28,19 +29,22 @@ const MyAssignedTours = () => {
     })
     console.log('MyAssignedTours page theke requested data', bookingPackages)
 
-    const handleStatusUpdate = (id, status)=> {
-        axiosSecure.patch(`/updatePackageBooking/${id}`, {status})
-        .then(res => {
-            console.log(res.data)
-            if(res.data.modifiedCount){
-                refetch()
-                toast.success('Successfully Updated!')
+    const handleStatusUpdate = (id, status) => {
+        axiosSecure.patch(`/updatePackageBooking/${id}`, { status })
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount) {
+                    refetch()
+                    toast.success('Successfully Updated!')
 
-            }
-        })
+                }
+            })
     }
     return (
         <div>
+            <Helmet>
+                <title>TouristBook || assignedTours</title>
+            </Helmet>
             <div className="overflow-x-auto border w-full mx-auto bg-[#1313180D] rounded-xl border-black  ">
                 <table className="min-w-full text-[16px] font-semibold ">
                     <thead className="dark:bg-gray-300 bg-slate-600 mt-10">
@@ -92,11 +96,11 @@ const MyAssignedTours = () => {
 
                                 <td className="">
 
-                                        <button disabled={spot?.bookingStatus === "Accepted" || spot?.bookingStatus === "Rejected" } onClick={()=> handleStatusUpdate(spot?._id, 'Accepted')} className="btn btn-sm ml-2 text-white bg-[#076aa5]"><MdDoneOutline size={22}  /></button>
+                                    <button disabled={spot?.bookingStatus === "Accepted" || spot?.bookingStatus === "Rejected"} onClick={() => handleStatusUpdate(spot?._id, 'Accepted')} className="btn btn-sm ml-2 text-white bg-[#076aa5]"><MdDoneOutline size={22} /></button>
                                 </td>
-                           
+
                                 <td className="">
-                                    <button  disabled={spot?.bookingStatus === "Accepted" || spot?.bookingStatus === "Rejected" } onClick={()=> handleStatusUpdate(spot?._id, 'Rejected')}  className="btn btn-sm ml-2 text-white btn-warning"> <IoMdCloseCircleOutline size={22} /></button>
+                                    <button disabled={spot?.bookingStatus === "Accepted" || spot?.bookingStatus === "Rejected"} onClick={() => handleStatusUpdate(spot?._id, 'Rejected')} className="btn btn-sm ml-2 text-white btn-warning"> <IoMdCloseCircleOutline size={22} /></button>
                                 </td>
                             </tr>
 
