@@ -4,6 +4,7 @@ import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword,
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import { FacebookAuthProvider } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 
@@ -30,6 +31,13 @@ const [confettiValue, setConfettiValue] = useState(false)
     const signInGithub = () => {
         setLoading(true);
         return signInWithPopup(auth, githubProvider);
+    }
+
+    // logn with facebook
+    const facebookProvider = new FacebookAuthProvider();
+    const signInFacebook = ()=> {
+        setLoading(true);
+        return signInWithPopup(auth, facebookProvider)
     }
 
     // login user
@@ -109,7 +117,7 @@ const [confettiValue, setConfettiValue] = useState(false)
 
 
 
-    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile, confetti,  confettiValue  }
+    const authInfo = { register, login, user, logOut, signInGoogle, signInGithub, loading, setLoading, handleUpdateProfile, confetti,  confettiValue , signInFacebook }
 
     return (
         <AuthContext.Provider value={authInfo}>

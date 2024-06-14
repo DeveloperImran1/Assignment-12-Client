@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         },
         {
             path: '/spot/:id',
-            element: <PrivateRoute><PackageDetails></PackageDetails></PrivateRoute>
+            element: <PackageDetails></PackageDetails>
         },
         {
             path: '/allSpots',

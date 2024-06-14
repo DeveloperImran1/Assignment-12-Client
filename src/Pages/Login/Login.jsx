@@ -1,17 +1,16 @@
 
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaFacebook } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 // react sweet alert
 import Swal from 'sweetalert2'
 import 'animate.css';
 import useAuth from "../../hooks/useAuth";
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { Helmet } from "react-helmet";
 
 const Login = () => {
-    const { login, signInGoogle, signInGithub, user, loading, confetti } = useAuth();
+    const { login, signInGoogle, signInGithub, user, loading, confetti, signInFacebook } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -91,7 +90,7 @@ const Login = () => {
                 // navigate("/")
                 loginModal()
             })
-            .catch(err => console.log(err))
+            .catch(err => loginModalError())
     }
 
 
@@ -102,27 +101,51 @@ const Login = () => {
                 console.log(result)
                 loginModal()
             })
-            .catch(err => console.log(err))
+            .catch(err => loginModalError())
+    }
+
+    // facebook signIn
+    const handleFacebookSignIn = () => {
+        signInFacebook()
+            .then(res => {
+                console.log(res)
+                loginModal()
+            })
+            .catch(err => {
+                console.log(err)
+                loginModalError()
+            })
     }
     return (
-        <div>
+        <div className="relative" >
 
             <Helmet>
                 <title>TouristBook || Login</title>
             </Helmet>
 
             <div className="flex justify-center mx-auto">
-                <img className="w-auto h-7 sm:h-8" src="https://i.ibb.co/tC4g9Ws/home-logo-and-symbols-vector-removebg-preview.png" />
-            </div>
+                <img
+                    src='https://i.ibb.co/xD2TrVn/z3376104only-T-removebg-preview.png'
+                    alt='logo'
+                    width='80'
+                    height='80'
+                />          
+                  </div>
 
             <h1 className="mt-4 mb-9 text-2xl font-semibold tracking-wide text-center text-gray-800 capitalize md:text-3xl dark:text-white">
                 welcome Back
             </h1>
-            <div id="login" className="   rounded-2xl w-[100%] flex flex-col-reverse lg:flex-row gap-5 items-center justify-evenly"  >
+            <div className="h-[200px] w-[200px] absolute hidden lg:flex" >
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#B2E0FF" d="M40.1,-63.1C51,-55.3,58.3,-42.6,67.1,-29C75.8,-15.4,85.9,-0.8,86.8,14.5C87.7,29.8,79.5,45.8,67.8,58.2C56.2,70.7,41.1,79.6,26.1,79.7C11.2,79.9,-3.6,71.3,-14.7,62.4C-25.8,53.5,-33.1,44.3,-44.5,35.9C-55.8,27.5,-71.1,20,-76.3,8.7C-81.4,-2.6,-76.5,-17.6,-67.3,-27.8C-58.1,-37.9,-44.6,-43.2,-32.7,-50.6C-20.8,-58,-10.4,-67.5,2.1,-70.7C14.6,-73.9,29.1,-70.9,40.1,-63.1Z" transform="translate(100 100)" />
+                </svg>
+            </div>
+            <div id="login" className="   rounded-2xl w-[100%] "  >
+            {/* <div className=" p-6 dark:bg-gray-50 relative group dark:text-gray-900 border hover:border-2 hover:border-[#076aa5] rounded-tr-[38px] rounded-bl-[38px] hover:rounded-[38px] ease-in duration-300"> */}
 
 
-                <div className=" ">
-                    <div className="z-60 relative w-full lg:w-[400px] p-8 space-y-3 rounded-xl border border-[#076aa5] bg-white  font-sans mx-auto">
+                <div className="  ">
+                    <div className="z-60 relative w-full lg:w-[400px] p-8 space-y-3 border-[#076aa5] bg-white  font-sans mx-auto dark:bg-gray-50  group dark:text-gray-900 border hover:border-2 hover:border-[#076aa5] rounded-tr-[38px] rounded-bl-[38px] hover:rounded-[38px] ease-in duration-300">
                         <h1 className="animate__animated animate__fadeInDownBig  text-3xl font-bold text-center text-[#076aa5]">Login</h1>
                         {/* Input fields and the form started */}
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -132,7 +155,7 @@ const Login = () => {
                                         Email
                                     </label>
                                 </div>
-                                <input type="email" name="email" id="email" placeholder="Your Email" className="w-full px-4 py-3 rounded-md border border-[#076aa5] focus:outline-none focus:ring  " />
+                                <input type="email" name="email" id="email" placeholder="Your Email" className="w-full px-4 py-3  border-[#076aa5] focus:outline-none focus:ring p-6 dark:bg-gray-50 relative group dark:text-gray-900 border-2 hover:border-2 hover:border-[#076aa5] rounded-tr-[28px] rounded-bl-[28px] hover:rounded-[38px] ease-in duration-300 " />
                             </div>
                             <div className="space-y-2 text-sm">
 
@@ -142,7 +165,7 @@ const Login = () => {
                                     </label>
                                 </div>
                                 <div className="relative ">
-                                    <input type={`${showPassword ? 'password' : 'text'}`} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border border-[#076aa5] focus:outline-none focus:ring  " />
+                                    <input type={`${showPassword ? 'password' : 'text'}`} name="password" id="password" placeholder="Password" className="w-full px-4 py-3  border-[#076aa5] focus:outline-none focus:ring p-6 dark:bg-gray-50 relative group dark:text-gray-900 border-2 hover:border-2 hover:border-[#076aa5] rounded-tr-[28px] rounded-bl-[28px] hover:rounded-[38px] ease-in duration-300 " />
                                     <div className="absolute top-3 right-3 " onClick={() => setShowPassword(!showPassword)}>
                                         {showPassword ? <FaEyeSlash size="20" ></FaEyeSlash> : <FaEye size="20"></FaEye>}
                                     </div>
@@ -157,7 +180,7 @@ const Login = () => {
                             {/* Sign in Button */}
                             <button
                                 data-aos="flip-left"
-                                className="text-lg rounded-xl relative p-[10px] block w-full bg-[#076aa5] text-white border-y-4 duration-500 overflow-hidden focus:border-[#076aa5] group">
+                                className="text-lg block  bg-[#076aa5] text-white border-y-4 overflow-hidden focus:border-[#076aa5] group w-full px-4 py-2  border-[#076aa5] focus:outline-none focus:ring dark:bg-gray-50 relative group dark:text-gray-900 border-2 hover:border-2 hover:border-[#076aa5] rounded-tr-[28px] rounded-bl-[28px] hover:rounded-[38px] ease-in duration-300">
                                 Log In
                                 <span className="absolute opacity-0 group-hover:opacity-100 duration-100 group-hover:duration-1000 ease-out flex justify-center inset-0 items-center  text-white">
                                     Let&apos;s go
@@ -185,8 +208,8 @@ const Login = () => {
 
                             <button
                                 data-aos="flip-left"
-                                onClick={handleGithubSignIn} aria-label="Log in with GitHub" className="p-3 rounded-full hover:bg-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-current"><path d="M16 0.396c-8.839 0-16 7.167-16 16 0 7.073 4.584 13.068 10.937 15.183 0.803 0.151 1.093-0.344 1.093-0.772 0-0.38-0.009-1.385-0.015-2.719-4.453 0.964-5.391-2.151-5.391-2.151-0.729-1.844-1.781-2.339-1.781-2.339-1.448-0.989 0.115-0.968 0.115-0.968 1.604 0.109 2.448 1.645 2.448 1.645 1.427 2.448 3.744 1.74 4.661 1.328 0.14-1.031 0.557-1.74 1.011-2.135-3.552-0.401-7.287-1.776-7.287-7.907 0-1.751 0.62-3.177 1.645-4.297-0.177-0.401-0.719-2.031 0.141-4.235 0 0 1.339-0.427 4.4 1.641 1.281-0.355 2.641-0.532 4-0.541 1.36 0.009 2.719 0.187 4 0.541 3.043-2.068 4.381-1.641 4.381-1.641 0.859 2.204 0.317 3.833 0.161 4.235 1.015 1.12 1.635 2.547 1.635 4.297 0 6.145-3.74 7.5-7.296 7.891 0.556 0.479 1.077 1.464 1.077 2.959 0 2.14-0.020 3.864-0.020 4.385 0 0.416 0.28 0.916 1.104 0.755 6.4-2.093 10.979-8.093 10.979-15.156 0-8.833-7.161-16-16-16z"></path></svg>
+                                onClick={handleFacebookSignIn} aria-label="Log in with GitHub" className="p-3 rounded-full hover:bg-gray-200">
+                                <FaFacebook size={25} className="text-[#076aa5] " ></FaFacebook>
                             </button>
                         </div>
                         <p
@@ -200,17 +223,13 @@ const Login = () => {
                     </div>
 
                 </div>
-                <img className="w-[400px] h-[60%] " src="https://i.ibb.co/m50872x/features-2.png" alt="" />
+                {/* <img className="w-[400px] h-[60%] " src="https://i.ibb.co/m50872x/features-2.png" alt="" /> */}
+                <div className="-mt-[200px] -mb-8 hidden lg:flex " >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="0.3" d="M0,64L48,101.3C96,139,192,213,288,240C384,267,480,245,576,208C672,171,768,117,864,96C960,75,1056,85,1152,112C1248,139,1344,181,1392,202.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+                </div>
             </div>
 
-            <MessengerCustomerChat
-                // pageId="104635808891000"
-                // appId="979168570366441"
 
-                // gias vaier aita
-                pageId="109036884171314"
-                appId="745410220448330"
-            />
 
         </div>
     );
