@@ -253,7 +253,9 @@ const Register = () => {
                                     {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                                 </div>
                             </div>
-                            <img src={imagePreview} className="h-[100px] w-[100px] rounded-xl" alt="" />
+                           {
+                             imagePreview && <img src={imagePreview} className="h-[100px] w-[100px] rounded-xl" alt="" />
+                           }
 
                         </div>
                         {/* Sign in Button */}
