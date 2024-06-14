@@ -45,14 +45,6 @@ const Blogs = () => {
         }
     }
     
-    const [pageNumber,setPageNumber] = useState(0)
-    const page = 5 // Adjust the page numbers the way you want
-    const updatePageNumber = (num)=>{
-        if((num > (page - 1)) || (0 > num)){ return setPageNumber(0) }
-        setPageNumber(num)
-    }
-
-
 
     const { data: blogs = [], refetch } = useQuery({
         queryKey: ['blogs', search, currentPage],
@@ -196,7 +188,7 @@ const Blogs = () => {
             </div>
 
 
-            <div className='flex select-none justify-center items-center gap-5 '>
+            <div className='flex select-none justify-center items-center gap-5  mt-8'>
                 {/* left arrow */}
                 <div onClick={handlePrev} className=' hover:scale-110 scale-100 transition-all duration-200 cursor-pointer hover:bg-sky-200 px-1 py-1 rounded-full'>
                     <svg className='w-10' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"> <path d="M15 7L10 12L15 17" stroke="#0284C7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /> </g></svg>
