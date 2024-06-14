@@ -182,14 +182,7 @@ const Login = () => {
                                 data-aos="flip-left"
                                 className="text-lg block  bg-[#076aa5] text-white border-y-4 overflow-hidden focus:border-[#076aa5] group w-full px-4 py-2  border-[#076aa5] focus:outline-none focus:ring dark:bg-gray-50 relative group dark:text-gray-900 border-2 hover:border-2 hover:border-[#076aa5] rounded-tr-[28px] rounded-bl-[28px] hover:rounded-[38px] ease-in duration-300">
                                 Log In
-                                <span className="absolute opacity-0 group-hover:opacity-100 duration-100 group-hover:duration-1000 ease-out flex justify-center inset-0 items-center  text-white">
-                                    Let&apos;s go
-                                </span>
-                                <span className="bg-[#076aa5] absolute inset-0 -translate-y-full group-hover:translate-y-0 group-hover:duration-1000"></span>
-                                <span className="bg-[#076aa5] absolute inset-0 translate-y-full group-hover:translate-y-0 group-hover:duration-1000"></span>
-                                <span className="bg-[#076aa5] absolute inset-0 translate-x-full group-hover:translate-x-0 group-hover:delay-300 delay-100 duration-1000"></span>
-                                <span className="bg-[#076aa5] absolute inset-0 -translate-x-full group-hover:translate-x-0 group-hover:delay-300 delay-100 duration-1000"></span>
-                            </button>
+                   </button>
                         </form>
                         <div
                             data-aos="flip-left"
