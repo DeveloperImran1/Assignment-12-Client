@@ -123,7 +123,7 @@ const router = createBrowserRouter([
             // Tourist Dashboard
             {
                 path: '/dashboard/tourist-profile',
-                element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+                element: <MyProfile></MyProfile>
             },
             {
                 path: '/dashboard/tourist-myBooking',

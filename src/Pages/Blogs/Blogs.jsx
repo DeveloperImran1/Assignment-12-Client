@@ -14,15 +14,54 @@ import { Helmet } from "react-helmet";
 
 const Blogs = () => {
     const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
 
     const axiosPublic = useAxiosPublic();
-    const { data: blogs = [], refetch } = useQuery({
-        queryKey: ['blogs', search],
+
+    // blogs er total data length ta jana jai.
+    const { data: blogsCount = {} } = useQuery({
+        queryKey: ['blogsCount'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/blogs?search=${search}`)
+            const res = await axiosPublic.get(`/blogsCount`)
             return res.data;
         }
     })
+
+
+
+    // pagination er kiso kaj
+    const numberOfPage = 7;
+    const pages = numberOfPage ? [...Array(numberOfPage).keys()] : 0;
+
+    const handlePrev = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNext = () => {
+        if (currentPage < pages?.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+    
+    const [pageNumber,setPageNumber] = useState(0)
+    const page = 5 // Adjust the page numbers the way you want
+    const updatePageNumber = (num)=>{
+        if((num > (page - 1)) || (0 > num)){ return setPageNumber(0) }
+        setPageNumber(num)
+    }
+
+
+
+    const { data: blogs = [], refetch } = useQuery({
+        queryKey: ['blogs', search, currentPage],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/blogs?search=${search}&page=${currentPage}`)
+            return res.data;
+        }
+    })
+
 
     const { data: blogFirst = {} } = useQuery({
         queryKey: ['blogFirst'],
@@ -154,6 +193,23 @@ const Blogs = () => {
                 {
                     blogs?.slice().reverse().map(blog => <BlogsCard key={blog?._id} blog={blog} refetch={refetch} ></BlogsCard>)
                 }
+            </div>
+
+
+            <div className='flex select-none justify-center items-center gap-5 '>
+                {/* left arrow */}
+                <div onClick={handlePrev} className=' hover:scale-110 scale-100 transition-all duration-200 cursor-pointer hover:bg-sky-200 px-1 py-1 rounded-full'>
+                    <svg className='w-10' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"> <path d="M15 7L10 12L15 17" stroke="#0284C7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /> </g></svg>
+                </div>
+                <div className='flex justify-center items-center gap-2 '>
+                    {pages.map((item, ind) => <div onClick={() => setCurrentPage(item)} className={`cursor-pointer hover:scale-110 scale-100 transition-all duration-200 px-5 ${currentPage === item ? 'bg-sky-500 text-white' : 'bg-white'} border-sky-300  font-semibold text-gray-700   py-3 rounded-full`} key={item}>
+                        {item + 1}
+                    </div>)}
+                </div>
+                {/* right arrow */}
+                <div onClick={handleNext} className='bg-gray-200 hover:scale-110 scale-100 transition-all duration-200 cursor-pointer hover:bg-sky-100 px-4 py-4 rounded-full'>
+                    <svg className='w-4' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"> <path fillRule="evenodd" clipRule="evenodd" d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z" fill="#000000" /> </g></svg>
+                </div>
             </div>
 
         </div>
