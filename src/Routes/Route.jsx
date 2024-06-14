@@ -26,6 +26,9 @@ import AllSpots from "../Pages/AllSpots/AllSpots";
 import BlogsDetails from "../Pages/Blogs/BlogsDetails";
 import NormalUserProfile from "../Components/NormalUserProfile";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import TourGuideRoute from "./TourGuideRoute";
 
   
 const router = createBrowserRouter([
@@ -68,7 +71,7 @@ const router = createBrowserRouter([
         },
         {
             path: '/spot/:id',
-            element: <PackageDetails></PackageDetails>
+            element: <PrivateRoute><PackageDetails></PackageDetails></PrivateRoute>
         },
         {
             path: '/allSpots',
@@ -76,7 +79,7 @@ const router = createBrowserRouter([
         },
         {
             path: '/tourGuide/:id',
-            element: <TourGuideDetails></TourGuideDetails>
+            element: <PrivateRoute><TourGuideDetails></TourGuideDetails></PrivateRoute>
         },
         {
             path: '/userProfile/:email',
@@ -95,40 +98,40 @@ const router = createBrowserRouter([
             // admin Routes
             {
                 path: '/dashboard/admin-profile',
-                element: <AdminProfile></AdminProfile>
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
                 path: '/dashboard/admin-addPackage',
-                element: <AddPackage></AddPackage>
+                element: <AdminRoute><AddPackage></AddPackage></AdminRoute>
             },
             {
                 path: '/dashboard/admin-manageUsers',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
 
             // Tour Guide Routes
             {
                 path: '/dashboard/tourGuide-profile',
                 // element: <TourGuideProfile></TourGuideProfile>
-                element: <TourGuideDetails></TourGuideDetails>
+                element: <TourGuideRoute><TourGuideDetails></TourGuideDetails></TourGuideRoute>
             },
             {
                 path: '/dashboard/tourGuide-myAssigned',
-                element: <MyAssignedTours></MyAssignedTours>
+                element: <TourGuideRoute><MyAssignedTours></MyAssignedTours></TourGuideRoute>
             },
 
             // Tourist Dashboard
             {
                 path: '/dashboard/tourist-profile',
-                element: <MyProfile></MyProfile>
+                element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
             },
             {
                 path: '/dashboard/tourist-myBooking',
-                element: <MyBooking></MyBooking>
+                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
             },
             {
                 path: '/dashboard/tourist-myWishlist',
-                element: <MyWishlist></MyWishlist>
+                element: <PrivateRoute> <MyWishlist></MyWishlist></PrivateRoute>
             },
         
 

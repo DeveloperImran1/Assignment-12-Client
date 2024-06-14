@@ -5,6 +5,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import { ScaleLoader } from "react-spinners";
 
 const NormalUserProfile = () => {
     const axiosPublic = useAxiosPublic();
@@ -18,7 +19,9 @@ const NormalUserProfile = () => {
     })
     console.log(user)
     if (isLoading) {
-        return <div className="w-10 h-10 animate-[spin_2s_linear_infinite] rounded-full border-4 border-dashed border-sky-600"></div>
+        return <div className="flex justify-center items-center flex-col min-h-[calc(100vh-116px)]">
+        <ScaleLoader size={100} color='#F92FD3' ></ScaleLoader>
+    </div>
 
     }
 
