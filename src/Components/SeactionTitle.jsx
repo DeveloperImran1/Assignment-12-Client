@@ -1,4 +1,5 @@
 
+
 const SeactionTitle = ({name, title}) => {
     return (
         <div className="flex flex-col justify-center items-center gap-4 my-7" >

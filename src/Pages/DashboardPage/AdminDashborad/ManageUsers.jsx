@@ -58,7 +58,7 @@ console.log(currentPage)
     const { data: allUsers = [], refetch } = useQuery({
         queryKey: ['allUsers', filterRole, searchValue, currentPage],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?filterValue=${filterRole}&searchValue=${searchValue}&page=${currentPage}`,)
+            const res = await axiosPublic.get(`/users?filterValue=${filterRole}&searchValue=${searchValue}&page=${currentPage}`,)
             return res.data;
         }
     })
@@ -158,7 +158,7 @@ console.log(currentPage)
             </div>
 
             
-            <div className='flex select-none justify-center items-center gap-5 '>
+            <div className='flex select-none justify-center items-center gap-5 mt-8'>
                 {/* left arrow */}
                 <div onClick={handlePrev} className=' hover:scale-110 scale-100 transition-all duration-200 cursor-pointer hover:bg-sky-200 px-1 py-1 rounded-full'>
                     <svg className='w-10' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth={0} /><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" /><g id="SVGRepo_iconCarrier"> <path d="M15 7L10 12L15 17" stroke="#0284C7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /> </g></svg>

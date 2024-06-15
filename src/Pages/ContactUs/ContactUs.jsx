@@ -97,7 +97,7 @@ const ContactUs = () => {
                     <SeactionTitle name="Our Locations" title="Find Us With Google Map"  ></SeactionTitle>
 
                 </div>
-                <div className='flex justify-between' >
+                <div className='flex flex-col lg:flex-row justify-between' >
                     <div className='grid gap-7 grid-cols-2' >
                         <div onClick={() => setPlace([23.797911, 90.414391])} className='w-[230px] h-[230px] cursor-pointer md:mr-4 rounded-3xl bg-[#f3f4f6] hover:bg-[#076aa5] hover:text-white flex flex-col justify-center items-center' >
                             <span className='p-3 rounded-full bg-white text-black' >
@@ -133,7 +133,7 @@ const ContactUs = () => {
                         center={place}
                         zoom={11}
                         scrollWheelZoom={true}
-                        className="h-[40vh] md:h-[10vh] lg:h-[500px] w-[700px]"
+                        className="h-[300px] md:h-[400px] lg:h-[500px] w-[500px] md:w-[600px] lg:w-[700px]"
                     >
                         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                         <Marker position={place}>

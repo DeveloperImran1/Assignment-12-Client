@@ -43,13 +43,25 @@ const StorySlider = ({ cardStorys, cardRefetch }) => {
             <AddStory isOpen={addStoryIsOpen} closeModal={addStoryCloseModal} modalHandler={addStoryModalHandler} refetch={cardRefetch}></AddStory>
 
             <Swiper
-                slidesPerView={6}
-                // spaceBetween={30}
-                // pagination={{
-                //     clickable: true,
-                // }}
-                modules={[Pagination]}
-                className="mySwiper"
+                 // Uncomment this if you want a default number of slides per view
+      slidesPerView={2}
+      breakpoints={{
+        // When window width is >= 640px
+        640: {
+          slidesPerView: 3,
+        },
+        // When window width is >= 768px
+        768: {
+          slidesPerView: 5,
+        },
+        // When window width is >= 1024px
+        1024: {
+          slidesPerView: 6,
+        },
+      }}
+      pagination={{ clickable: true }}
+    //   modules={[Pagination]}
+      className="mySwiper"
             >
                 <SwiperSlide>
                     <div onClick={addStoryModalHandler} className='w-[200px] h-[300px] rounded-2xl flex flex-col' >

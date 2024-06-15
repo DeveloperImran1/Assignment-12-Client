@@ -4,10 +4,20 @@ import { BiSupport } from "react-icons/bi";
 import { BiSolidOffer } from "react-icons/bi";
 
 import videoFile from "../../public/spotVideo.mp4"
+
+// framer motion
+import { fadeIn } from '../hooks/Variant'
+import { motion } from "framer-motion"
+
 const TourismOverview = () => {
 
     return (
-        <div>
+        <motion.div 
+        variants={fadeIn('up', 0.2)}
+        initial="hidden"
+        whileInView={'show'}
+        viewport={{once: false, amount: 0.7}}
+       >
             <section className="dark:bg-gray-100 dark:text-gray-800">
                 <div className="container  p-6 mx-auto space-y-6 sm:space-y-12">
                     <a rel="noopener noreferrer" href="#" className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
@@ -61,7 +71,7 @@ const TourismOverview = () => {
 
             </section>
 
-        </div>
+        </motion.div>
     );
 };
 

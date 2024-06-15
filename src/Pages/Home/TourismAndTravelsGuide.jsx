@@ -5,10 +5,24 @@ import TourismOverview from '../../Components/TourismOverview';
 import AllTourGuides from '../../Components/AllTourGuides';
 import OurPackages from '../../Components/OurPackages/OurPackages';
 
+// framer motion
+import { fadeIn } from '../../hooks/Variant'
+import { motion } from "framer-motion"
+
+
 const TourismAndTravelsGuide = () => {
     return (
+       <>
         <div>
-<SeactionTitle title="Explore Our Tourism & Travels Guide" name="Travels Guide"  ></SeactionTitle>
+            <motion.div
+            variants={fadeIn('up', 0.2)}
+            initial="hidden"
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            >
+                <SeactionTitle title="Explore Our Tourism & Travels Guide" name="Travels Guide"  ></SeactionTitle>
+
+            </motion.div>
             <Tabs>
                 <TabList>
                     <Tab>Overview</Tab>
@@ -27,6 +41,8 @@ const TourismAndTravelsGuide = () => {
                 </TabPanel>
             </Tabs>
         </div>
+       
+       </>
     );
 };
 

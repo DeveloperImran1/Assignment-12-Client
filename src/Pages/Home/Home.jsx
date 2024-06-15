@@ -5,6 +5,8 @@ import TourType from "./TourType";
 import TourismAndTravelsGuide from "./TourismAndTravelsGuide";
 import { Helmet } from "react-helmet";
 
+
+
 const Home = () => {
     return (
         <div>

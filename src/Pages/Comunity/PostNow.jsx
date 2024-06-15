@@ -22,10 +22,10 @@ const PostNow = ({refetch, handleSearch}) => {
             handleSearch(e.target.value);
         }
     return (
-        <div className="flex items-center justify-between w-full gap-7">
+        <div className="flex flex-col md:flex-row items-center justify-between w-full gap-7">
                           <AddPostModal isOpen={addPostIsOpen} closeModal={addPostCloseModal} modalHandler={addPostModalHandler} refetch={refetch}></AddPostModal>
 
-            <div className="flex items-center justify-between w-[50%] gap-7" >
+            <div className="flex items-center justify-between md:w-[50%] gap-7" >
                 <img className="w-[60px] h-[60px] rounded-full border-4 cursor-pointer" src={user?.photoURL || avatarImg} alt="" />
                 <input onClick={addPostModalHandler} placeholder="What's Your Mind? " className="rounded-[18px] border w-full border-gray-600 bg-transparent px-4 py-2 text-gray-600  focus:outline-none cursor-pointer " type="text" />
                 <GrGallery onClick={addPostModalHandler} size={32} className="text-green-400 cursor-pointer" ></GrGallery>
@@ -33,7 +33,7 @@ const PostNow = ({refetch, handleSearch}) => {
             
             {/* input field  */}
 
-            <form onChange={searchValue} className="flex items-center w-[30%] ">
+            <form onChange={searchValue} className="flex items-center md:w-[30%] ">
                 <label for="voice-search" className="sr-only">Search</label>
                 <div className="relative w-full">
                
