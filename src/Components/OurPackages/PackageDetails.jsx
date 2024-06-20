@@ -163,7 +163,7 @@ const PackageDetails = () => {
                 <title>TouristBook || PackageDetails</title>
             </Helmet>
             <PackageDetailsInfo packageInfo={spotDetails} ></PackageDetailsInfo>
-            <div className="flex justify-between w-full mt-[60px]" >
+            <div className="flex flex-col lg:flex-row justify-between w-full mt-[60px]" >
                 <div className="flex flex-col gap-5  ">
                     <VerticalLinearStepper tourPlan={tourPlan} ></VerticalLinearStepper>
                     <div>
@@ -187,7 +187,7 @@ const PackageDetails = () => {
                     </div>
                 </div>
 
-                <form onSubmit={handleBooking} className="flex  flex-col px-6 py-8 w-[45%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
+                <form onSubmit={handleBooking} className="flex  flex-col px-6 py-8 lg:w-[45%] space-y-6   border-2 border-[#5A5A5D] rounded-[16px] ">
                     <div>
                         <img alt="" className="w-[500px] h-full  rounded-lg shadow-sm col-span-2 row-span-2  dark:bg-gray-500 " src={spotPhoto?.[0]} />
                     </div>
@@ -247,7 +247,7 @@ const PackageDetails = () => {
 
             <div className="" >
                 <SeactionTitle name="Related Packages" title="For Your Sujjested Spots" ></SeactionTitle>
-                <div className="grid grid-cols-2 gap-11" >
+                <div className="grid grid-cols-1  lg:grid-cols-2 gap-11" >
                     {
                         relatedSpots.slice(1, 3).map(relatedSpot => <OurPackagesCard key={relatedSpot?._id} spot={relatedSpot} loading={loading}></OurPackagesCard>)
                     }

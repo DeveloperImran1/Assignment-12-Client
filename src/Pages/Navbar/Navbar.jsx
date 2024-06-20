@@ -244,7 +244,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         {isOpen && (
-                            <div className='absolute rounded-xl shadow-md w-[250px]  bg-white overflow-hidden right-0 top-12 text-sm z-50'>
+                            <div className='absolute rounded-xl shadow-md w-[250px]  bg-white overflow-hidden right-0 top-12 text-black text-sm z-50'>
                                 <div className='flex flex-col cursor-pointer'>
                                     <div className='flex flex-col justify-center items-center gap-2'>
                                         <img

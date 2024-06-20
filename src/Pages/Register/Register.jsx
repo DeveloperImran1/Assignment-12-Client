@@ -165,7 +165,7 @@ const Register = () => {
             <Helmet>
                 <title>TouristBook || Register</title>
             </Helmet>
-            <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
+            <div className="flex w-full max-w-sm mx-auto overflow-hidden  rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
                 <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: "url('https://i.ibb.co/K9ZwbkX/pexels-photo-271624.webp')" }}
                 ></div>
 

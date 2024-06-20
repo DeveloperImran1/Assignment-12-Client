@@ -47,7 +47,7 @@ const ContactUs = () => {
 
                     <img src="https://i.ibb.co/Br9Fpxs/th-2-removebg-preview.png" alt="" className="lg:-ml-16 h-full" />
                 </div>
-                <form onSubmit={handleSubmit} noValidate="" className="space-y-6">
+                <form onSubmit={handleSubmit} noValidate="" className="space-y-6 ">
                     <div
                         data-aos="fade-up"
                         data-aos-offset="200"
@@ -57,7 +57,7 @@ const ContactUs = () => {
                         data-aos-mirror="true"
                     >
                         <label htmlFor="name" className="text-sm">Full name</label>
-                        <input id="name" type="text" placeholder="" className="w-full p-3 rounded " />
+                        <input id="name" type="text" placeholder="" className="w-full p-3 rounded  bg-white " />
                     </div>
                     <div
                         data-aos="fade-up"
@@ -68,7 +68,7 @@ const ContactUs = () => {
                         data-aos-mirror="true"
                     >
                         <label htmlFor="email" className="text-sm">Email</label>
-                        <input id="email" type="email" className="w-full p-3 rounded " />
+                        <input id="email" type="email" className="w-full p-3 rounded bg-white" />
                     </div>
                     <div
                         data-aos="fade-up"
@@ -79,7 +79,7 @@ const ContactUs = () => {
                         data-aos-mirror="true"
                     >
                         <label htmlFor="message" className="text-sm">Message</label>
-                        <textarea id="message" rows="3" className="w-full p-3 rounded "></textarea>
+                        <textarea id="message" rows="3" className="w-full p-3 rounded bg-white"></textarea>
                     </div>
                     <button
                         data-aos="fade-up"
@@ -97,14 +97,14 @@ const ContactUs = () => {
                     <SeactionTitle name="Our Locations" title="Find Us With Google Map"  ></SeactionTitle>
 
                 </div>
-                <div className='flex flex-col lg:flex-row justify-between' >
+                <div className='flex flex-col lg:flex-row justify-between ' >
                     <div className='grid gap-7 grid-cols-2' >
-                        <div onClick={() => setPlace([23.797911, 90.414391])} className='w-[230px] h-[230px] cursor-pointer md:mr-4 rounded-3xl bg-[#f3f4f6] hover:bg-[#076aa5] hover:text-white flex flex-col justify-center items-center' >
+                        <div onClick={() => setPlace([23.797911, 90.414391])} className='w-[230px] h-[230px] cursor-pointer md:mr-4 rounded-3xl bg-[#f3f4f6]  hover:bg-[#076aa5] hover:text-white flex flex-col justify-center items-center' >
                             <span className='p-3 rounded-full bg-white text-black' >
                                 <RiHomeOfficeFill size={30} ></RiHomeOfficeFill>
                             </span>
-                            <h2 className='text-[19px] font-bold' >Gulshan 1</h2>
-                            <h2 className='text-center px-3 mt-3' >Next to jump Mosque, towards Green Oasis Park.</h2>
+                            <h2 className='text-[19px] font-bold group  dark:text-black' >Gulshan 1</h2>
+                            <h2 className='text-center px-3 mt-3 group ' >Next to jump Mosque, towards Green Oasis Park.</h2>
                         </div>
                         <div onClick={() => setPlace([23.81093000, 90.36542000])} className='w-[230px] h-[230px] cursor-pointer rounded-3xl bg-[#f3f4f6] hover:bg-[#076aa5] hover:text-white flex flex-col justify-center items-center' >
                             <span className='p-3 rounded-full bg-white text-black' >

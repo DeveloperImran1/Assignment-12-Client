@@ -36,6 +36,9 @@ const StoryDetailsModal = ({ closeModal, isOpen, modalHandler, story }) => {
     const { comments, postDate, reactTotal, spotDescription, spotPhoto, spotTitle, userName,
         userEmail, userPhoto, _id } = story;
 
+        console.log(' card story holo: ', story)
+
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as='div' className='relative z-10' onClose={closeModal}>

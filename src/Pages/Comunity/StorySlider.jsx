@@ -19,9 +19,10 @@ import AddStory from '../../Components/Modal/AddStory';
 const StorySlider = ({ cardStorys, cardRefetch }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [addStoryIsOpen, setStoryPostIsOpen] = useState(false);
+    const [currentStory, setCurrentStory] = useState("");
 
     const modalHandler = () => {
-        console.log('moda open kor')
+
         setIsOpen(true)
 
     }
@@ -38,30 +39,32 @@ const StorySlider = ({ cardStorys, cardRefetch }) => {
     const addStoryCloseModal = () => {
         setStoryPostIsOpen(false)
     }
+
+    console.log('All card story holo: ', cardStorys)
     return (
         <div>
             <AddStory isOpen={addStoryIsOpen} closeModal={addStoryCloseModal} modalHandler={addStoryModalHandler} refetch={cardRefetch}></AddStory>
 
             <Swiper
-                 // Uncomment this if you want a default number of slides per view
-      slidesPerView={2}
-      breakpoints={{
-        // When window width is >= 640px
-        640: {
-          slidesPerView: 3,
-        },
-        // When window width is >= 768px
-        768: {
-          slidesPerView: 5,
-        },
-        // When window width is >= 1024px
-        1024: {
-          slidesPerView: 6,
-        },
-      }}
-      pagination={{ clickable: true }}
-    //   modules={[Pagination]}
-      className="mySwiper"
+                // Uncomment this if you want a default number of slides per view
+                slidesPerView={2}
+                breakpoints={{
+                    // When window width is >= 640px
+                    640: {
+                        slidesPerView: 3,
+                    },
+                    // When window width is >= 768px
+                    768: {
+                        slidesPerView: 5,
+                    },
+                    // When window width is >= 1024px
+                    1024: {
+                        slidesPerView: 6,
+                    },
+                }}
+                pagination={{ clickable: true }}
+                //   modules={[Pagination]}
+                className="mySwiper"
             >
                 <SwiperSlide>
                     <div onClick={addStoryModalHandler} className='w-[200px] h-[300px] rounded-2xl flex flex-col' >
@@ -76,8 +79,13 @@ const StorySlider = ({ cardStorys, cardRefetch }) => {
                     </div>
                 </SwiperSlide>
 
-                {cardStorys?.slice().reverse().map(story => <SwiperSlide key={story?._id} onClick={modalHandler} >
-                    <CardStoryModal isOpen={isOpen} closeModal={onClose} modalHandler={modalHandler} story={story} ></CardStoryModal>
+                {cardStorys?.slice().reverse().map(story => <SwiperSlide key={story?._id} onClick={() => {
+                    setCurrentStory(story)
+                    modalHandler()
+                }
+
+                } >
+                    <CardStoryModal isOpen={isOpen} closeModal={onClose} modalHandler={modalHandler} story={currentStory} ></CardStoryModal>
 
                     <div className='w-[200px] h-[300px] relative rounded-2xl ' >
                         <img className='cursor-pointer rounded-2xl h-full' src={story?.spotPhoto} alt="" />

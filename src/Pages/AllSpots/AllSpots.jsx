@@ -32,8 +32,8 @@ const AllSpots = () => {
 
     return (
         <div>
-            <div className="flex justify-between gap-7 items-start h-screen " >
-                <div className="w-[30%] " >
+            <div className="flex flex-col lg:flex-row justify-between gap-7 items-start lg:h-screen " >
+                <div className="w-full lg:w-[30%] " >
                     <div className="flex flex-col justify-center items-center gap-8 " >
 
                         <div className="flex flex-col justify-center items-center gap-4 my-7 mb-16" >
@@ -97,10 +97,10 @@ const AllSpots = () => {
 
 
                 </div>
-                <div className="w-[60%] h-screen flex-1 overflow-y-auto p-4 " >
+                <div className="w-full lg:w-[60%] h-full lg:h-screen lg:flex-1 lg:overflow-y-auto p-4 " >
 
 
-                    <div className="grid gap-8 grid-cols-2" >
+                    <div className="grid gap-8 grid-cols-1 lg:grid-cols-2" >
                         {
                             allSpots.map(spot => <OurPackagesCard key={spot._id} spot={spot} loading={loading} ></OurPackagesCard>)
                         }

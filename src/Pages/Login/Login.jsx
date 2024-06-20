@@ -132,7 +132,7 @@ const Login = () => {
                 />          
                   </div>
 
-            <h1 className="mt-4 mb-9 text-2xl font-semibold tracking-wide text-center text-gray-800 capitalize md:text-3xl dark:text-white">
+            <h1 className="mt-4 mb-9 text-2xl font-semibold tracking-wide text-center  group dark:text-gray-900  capitalize md:text-3xl ">
                 welcome Back
             </h1>
             <div className="h-[200px] w-[200px] absolute hidden lg:flex" >
@@ -145,7 +145,7 @@ const Login = () => {
 
 
                 <div className="  ">
-                    <div className="z-60 relative w-full lg:w-[400px] p-8 space-y-3 border-[#076aa5] bg-white  font-sans mx-auto dark:bg-gray-50  group dark:text-gray-900 border hover:border-2 hover:border-[#076aa5] rounded-tr-[38px] rounded-bl-[38px] hover:rounded-[38px] ease-in duration-300">
+                    <div className="z-60 relative w-full lg:w-[400px] p-8 space-y-3 border-[#076aa5] font-sans mx-auto dark:bg-gray-50  group dark:text-gray-900 border hover:border-2 hover:border-[#076aa5] rounded-tr-[38px] rounded-bl-[38px] hover:rounded-[38px] ease-in duration-300">
                         <h1 className="animate__animated animate__fadeInDownBig  text-3xl font-bold text-center text-[#076aa5]">Login</h1>
                         {/* Input fields and the form started */}
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -188,7 +188,7 @@ const Login = () => {
                             data-aos="flip-left"
                             className="flex items-center pt-4 space-x-2">
                             <div className="flex-1 h-px bg-gray-300"></div>
-                            <p className="text-sm text-gray-600">Login with social accounts</p>
+                            <p className="text-sm  group dark:text-gray-900 ">Login with social accounts</p>
                             <div className="flex-1 h-px bg-gray-300"></div>
                         </div>
                         {/* Social icons */}
