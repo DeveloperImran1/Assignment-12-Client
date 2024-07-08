@@ -28,6 +28,9 @@ Visit the live site at [TouristBook Live](https://touristbook.netlify.app/)
 - **Interactive Community Engagement:** Comment, like, and share community posts to foster a social and interactive platform.
 - **Responsive Support:** Provide users with the ability to contact the TouristBook support team via phone call for inquiries, assistance, or feedback, ensuring a responsive and user-friendly service.
 
+## Used Technology and Framework: 
+HTML, CSS, Tailwind CSS, Javascript, ReactJS, Firebase, NodeJS, ExpressJS, MongoDB
+
 ## How to Start This Application:
 1. **Clone the Repositories:**
     ```sh
