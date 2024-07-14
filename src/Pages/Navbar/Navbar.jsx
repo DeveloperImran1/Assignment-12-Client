@@ -27,6 +27,7 @@ const Navbar = () => {
     const { user, logOut, loading } = useAuth();
     const [isOpen, setIsOpen] = useState(false)
     const { userRole } = useRoleCollect()
+    let currentUserRole = userRole || "Tourist"; 
     console.log(userRole)
     const [isNotification, setNotification] = useState(false)
     const axiosPublic = useAxiosPublic();
@@ -290,19 +291,19 @@ const Navbar = () => {
                                     {user ? (
                                         <>
                                             {
-                                                userRole ? <>
+                                                currentUserRole ? <>
                                                     {
-                                                        userRole === "Admin" && <Link to="/dashboard/admin-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
+                                                        currentUserRole === "Admin" && <Link to="/dashboard/admin-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
                                                             Dashboard
                                                         </Link>
                                                     }
                                                     {
-                                                        userRole === "tourGuide" && <Link to="/dashboard/tourGuide-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
+                                                        currentUserRole === "tourGuide" && <Link to="/dashboard/tourGuide-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
                                                             Dashboard
                                                         </Link>
                                                     }
                                                     {
-                                                        userRole === "Tourist" && <Link to="/dashboard/tourist-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
+                                                        currentUserRole === "Tourist" && <Link to="/dashboard/tourist-profile" className='block px-4 py-3 hover:bg-neutral-100 transition font-semibold'  >
                                                             Dashboard
                                                         </Link>
                                                     }

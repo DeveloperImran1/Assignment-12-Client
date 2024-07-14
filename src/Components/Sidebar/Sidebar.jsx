@@ -165,7 +165,7 @@ const navigate = useNavigate();
           <hr />
 
           {/* Profile Menu */}
-          <NavLink
+          <NavLink to="/dashboard/tourist-profile"
             className={({ isActive }) =>
               `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300 rounded-lg  hover:text-gray-700 }`
             }
